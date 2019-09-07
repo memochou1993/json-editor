@@ -35,9 +35,12 @@ mix.webpackConfig({
 
 mix.js('resources/js/main.js', 'public/js')
   .extract([
+    'axios',
     'vue',
+    'vue-axios',
+    'vue-i18n',
     'vue-router',
-    'vuex',
     'vuetify',
+    'vuex',
   ])
   .sourceMaps();
