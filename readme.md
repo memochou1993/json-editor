@@ -29,16 +29,16 @@ Copy `.env.example` to `.env`.
 cp .env.example .env
 ```
 
-Set a random secure application key.
-
-```BASH
-php artisan key:generate
-```
-
 Install the Composer dependencies.
 
 ```BASH
 composer install
+```
+
+Set a random secure application key.
+
+```BASH
+php artisan key:generate
 ```
 
 Install the npm dependencies.
@@ -49,7 +49,7 @@ npm install
 
 ## Usage
 
-Watch all relevant files for changes.
+Watch assets for changes.
 
 ```BASH
 npm run watch
