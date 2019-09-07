@@ -1,6 +1,15 @@
 # Laravel SPA
 
-Laravel 6.0 + Vue 2.6 + Vuetify 2.0 = Laravel SPA 💥
+Laravel 6.0 + Vue + Vuetify 2.0 = Laravel SPA 💥
+
+## Features
+
+- Laravel 6.0
+- Vue
+- Vuetify 2.0
+- Vue Router + Vue I18n + Vue Axios
+- Material Design Icons
+- ESLint
 
 ## Requirements
 
@@ -38,19 +47,21 @@ Install the npm dependencies.
 npm install
 ```
 
-Compiles and hot-reloads.
+## Usage
+
+Watch all relevant files for changes.
 
 ```BASH
 npm run watch
 ```
 
-Compiles for development.
+Run all Mix tasks.
 
 ```BASH
 npm run dev
 ```
 
-Compiles for production.
+Run all Mix tasks and minify output.
 
 ```BASH
 npm run prod

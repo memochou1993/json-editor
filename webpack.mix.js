@@ -1,27 +1,5 @@
 const mix = require('laravel-mix');
 
-mix.webpackConfig({
-  module: {
-    rules: [
-      {
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  resolve: {
-    extensions: [
-      '.js',
-      '.vue',
-    ],
-    alias: {
-      '@': __dirname + '/resources/js',
-    },
-  },
-});
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -33,7 +11,29 @@ mix.webpackConfig({
  |
  */
 
-mix.js('resources/js/main.js', 'public/js')
+mix
+  .webpackConfig({
+    module: {
+      rules: [
+        {
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
+    resolve: {
+      extensions: [
+        '.js',
+        '.vue',
+      ],
+      alias: {
+        '@': __dirname + '/resources/js',
+      },
+    },
+  })
+  .js('resources/js/main.js', 'public/js')
   .extract([
     'axios',
     'vue',
