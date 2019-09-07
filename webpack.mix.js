@@ -1,15 +1,25 @@
 const mix = require('laravel-mix');
 
 mix.webpackConfig({
-    resolve: {
-        extensions: [
-            '.js',
-            '.vue',
-        ],
-        alias: {
-            '@': __dirname + '/resources/js',
-        },
+  module: {
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [
+      '.js',
+      '.vue',
+    ],
+    alias: {
+      '@': __dirname + '/resources/js',
     },
+  },
 });
 
 /*
@@ -24,10 +34,10 @@ mix.webpackConfig({
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .extract([
-        'vue',
-        'vue-router',
-        'vuex',
-        'vuetify',
-    ])
-    .sourceMaps();
+  .extract([
+    'vue',
+    'vue-router',
+    'vuex',
+    'vuetify',
+  ])
+  .sourceMaps();
