@@ -1,20 +1,15 @@
 <template>
-  <div>
-    <v-app>
-      <TheToolbar />
-      <v-content>
-        <v-container
-          fluid
-          fill-height
-        >
-          <v-flex>
-            <router-view />
-          </v-flex>
-        </v-container>
-      </v-content>
-      <TheFooter />
-    </v-app>
-  </div>
+  <v-app>
+    <TheToolbar />
+    <v-content>
+      <v-container>
+        <v-flex>
+          <router-view />
+        </v-flex>
+      </v-container>
+    </v-content>
+    <TheFooter />
+  </v-app>
 </template>
 
 <script>
