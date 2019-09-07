@@ -37,11 +37,7 @@
         <v-app-bar-nav-icon
           @click.stop="setDrawer(!drawer)"
         />
-        <span
-          class="pointer"
-        >
-          Laravel SPA
-        </span>
+        Laravel SPA
       </v-toolbar-title>
     </v-app-bar>
   </div>

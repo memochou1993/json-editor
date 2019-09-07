@@ -9,11 +9,7 @@
       <v-card-text
         class="white--text"
       >
-        <span
-          class="pointer"
-        >
-          &copy; 2019 Memo Chou
-        </span>
+        &copy; 2019 Memo Chou
       </v-card-text>
     </v-card>
   </v-footer>
