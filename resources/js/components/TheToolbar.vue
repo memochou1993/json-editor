@@ -58,14 +58,14 @@ export default {
     links() {
       return [
         {
-          title: 'Home',
+          title: this.$t('links.home'),
           icon: 'mdi-home',
           to: {
             name: 'home',
           },
         },
         {
-          title: 'About',
+          title: this.$t('links.about'),
           icon: 'mdi-information-outline',
           to: {
             name: 'about',
