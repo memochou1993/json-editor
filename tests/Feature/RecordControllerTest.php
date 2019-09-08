@@ -128,4 +128,54 @@ class RecordControllerTest extends TestCase
         $response
             ->assertStatus(204);
     }
+
+    /**
+     * @return void
+     */
+    public function testDestroyWithPassword()
+    {
+        $headers = [
+            'Accept' => 'application/json',
+        ];
+
+        $record = factory(Record::class)->create([
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        ]);
+
+        $data = [
+            'password' => 'password',
+        ];
+
+        $response = $this
+            ->withHeaders($headers)
+            ->delete('/api/records/'.$record->id, $data);
+
+        // dd($response->getContent());
+
+        $response
+            ->assertStatus(204);
+    }
+
+    /**
+     * @return void
+     */
+    public function testDestroyWithoutPassword()
+    {
+        $headers = [
+            'Accept' => 'application/json',
+        ];
+
+        $record = factory(Record::class)->create([
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        ]);
+
+        $response = $this
+            ->withHeaders($headers)
+            ->delete('/api/records/'.$record->id);
+
+        // dd($response->getContent());
+
+        $response
+            ->assertStatus(403);
+    }
 }

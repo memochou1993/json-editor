@@ -63,11 +63,16 @@ class RecordController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Http\Requests\RecordRequest  $request
      * @param  \App\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Record $record)
+    public function destroy(Request $request, Record $record)
     {
+        if ($record->password && ! Hash::check($request->password, $record->password)) {
+            abort(403);
+        }
+
         $record->delete();
 
         return response(null, 204);

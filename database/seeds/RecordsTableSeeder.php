@@ -12,8 +12,6 @@ class RecordsTableSeeder extends Seeder
      */
     public function run()
     {
-        $records = factory(Record::class)->times(100)->make()->toArray();
-
-        Record::insert($records);
+        factory(Record::class, 100)->create();
     }
 }
