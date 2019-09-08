@@ -12,6 +12,5 @@ $factory->define(Record::class, function (Faker $faker) {
         'data' => Crypt::encrypt([
             'city' => $faker->city(),
         ]),
-        'expires_in' => $faker->boolean() ? $faker->randomDigitNotNull() * 3600 : null,
     ];
 });

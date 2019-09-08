@@ -76,6 +76,59 @@ class RecordControllerTest extends TestCase
     /**
      * @return void
      */
+    public function testShowUnexpired()
+    {
+        $headers = [
+            'Accept' => 'application/json',
+        ];
+
+        $record = factory(Record::class)->create([
+            'expires_in' => 3600,
+        ]);
+
+        $response = $this
+            ->withHeaders($headers)
+            ->get('/api/records/'.$record->id);
+
+        // dd($response->getContent());
+
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'name',
+                'data',
+                'expires_in',
+                'created_at',
+                'updated_at',
+            ]);
+    }
+
+    /**
+     * @return void
+     */
+    public function testShowExpired()
+    {
+        $headers = [
+            'Accept' => 'application/json',
+        ];
+
+        $record = factory(Record::class)->create([
+            'expires_in' => -1,
+        ]);
+
+        $response = $this
+            ->withHeaders($headers)
+            ->get('/api/records/'.$record->id);
+
+        // dd($response->getContent());
+
+        $response
+            ->assertStatus(404);
+    }
+
+    /**
+     * @return void
+     */
     public function testUpdate()
     {
         $headers = [
@@ -132,7 +185,7 @@ class RecordControllerTest extends TestCase
     /**
      * @return void
      */
-    public function testDestroyWithPassword()
+    public function testDestroyChecked()
     {
         $headers = [
             'Accept' => 'application/json',
@@ -159,7 +212,7 @@ class RecordControllerTest extends TestCase
     /**
      * @return void
      */
-    public function testDestroyWithoutPassword()
+    public function testDestroyUnchecked()
     {
         $headers = [
             'Accept' => 'application/json',

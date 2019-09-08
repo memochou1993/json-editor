@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Record;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\RecordRequest as Request;
@@ -36,6 +37,12 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
+        if ($record->expires_in) {
+            if (Carbon::now()->diffInSeconds(new Carbon($record->created_at)) > $record->expires_in) {
+                abort(404);
+            }
+        }
+
         return new Resource($record);
     }
 
@@ -69,8 +76,10 @@ class RecordController extends Controller
      */
     public function destroy(Request $request, Record $record)
     {
-        if ($record->password && ! Hash::check($request->password, $record->password)) {
-            abort(403);
+        if ($record->password) {
+            if (! Hash::check($request->password, $record->password)) {
+                abort(403);
+            }
         }
 
         $record->delete();
