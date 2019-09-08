@@ -1,3 +1,46 @@
 $font-size-root: 16px;
 
 @import '~vuetify/src/styles/main.sass';
+
+$primary: #16456E;
+
+div {
+    .jsoneditor {
+        height: 75vh;
+        z-index: 0;
+        border-color: $primary;
+    }
+    .jsoneditor-menu {
+        border-color: $primary;
+        background-color: $primary;
+        a.jsoneditor-poweredBy {
+            color: $primary;
+            text-decoration: none;
+            &:hover {
+                color: #FFFFFF;
+                opacity: 0.8;
+            }
+        }
+    }
+}
+.jsoneditor-modal {
+    a {
+        color: $primary;
+    }
+    .pico-modal-header {
+        background: $primary;
+    }
+    .jsoneditor-button-group.jsoneditor-button-group-value-asc {
+        input.jsoneditor-button-asc {
+            background: $primary;
+        }
+    }
+    .jsoneditor-button-group.jsoneditor-button-group-value-desc {
+        input.jsoneditor-button-desc {
+            background: $primary;
+        }
+    }
+    .jsoneditor-jmespath-label {
+        color: $primary;
+    }
+}

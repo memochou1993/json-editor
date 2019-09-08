@@ -5,6 +5,7 @@ import store from '@/store/index';
 import i18n from '@/i18n/index';
 import vuetify from '@/plugins/vuetify';
 import '@/plugins/axios';
+import '@/plugins/editor';
 import '@/sass/main.scss';
 
 Vue.config.productionTip = false;

@@ -2,7 +2,10 @@
   <v-app>
     <TheToolbar />
     <v-content>
-      <v-container>
+      <v-container
+        fluid
+        fill-height
+      >
         <v-flex>
           <router-view />
         </v-flex>
