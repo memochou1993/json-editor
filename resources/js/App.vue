@@ -29,5 +29,10 @@ export default {
 </script>
 
 <style lang="scss">
-//
+.primary-gradient {
+  background-image: -webkit-linear-gradient(right, #061D30, #2C4C68);
+  background-image: -moz-linear-gradient(right, #061D30, #2C4C68);
+  background-image: -o-linear-gradient(right, #061D30, #2C4C68);
+  background-image: linear-gradient(to right, #061D30, #2C4C68);
+}
 </style>

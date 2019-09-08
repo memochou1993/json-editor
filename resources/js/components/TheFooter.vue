@@ -4,7 +4,7 @@
   >
     <v-card
       width="100%"
-      class="primary lighten-1 text-center"
+      class="primary primary-gradient text-center"
     >
       <v-card-text
         class="white--text"

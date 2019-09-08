@@ -2,7 +2,7 @@
   <div>
     <v-app-bar
       dark
-      color="primary"
+      class="primary primary-gradient"
     >
       <v-toolbar-title
         class="headline"
