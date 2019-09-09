@@ -15,7 +15,7 @@ trait HashId
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function decode($value)
     {
