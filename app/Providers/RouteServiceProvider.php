@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        Route::bind('record', function ($hash_id) {
+            return \App\Record::findOrFail(collect(Hashids::decode($hash_id))->first());
+        });
     }
 
     /**

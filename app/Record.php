@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\HashId;
 use Illuminate\Database\Eloquent\Model;
 
 class Record extends Model
 {
+    use HashId;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -31,5 +34,14 @@ class Record extends Model
      */
     protected $casts = [
         'expires_in' => 'integer',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'hash_id',
     ];
 }
