@@ -58,7 +58,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->get('/api/records/'.$record->id);
+            ->get('/api/records/'.$record->hash_id);
 
         // dd($response->getContent());
 
@@ -88,7 +88,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->get('/api/records/'.$record->id);
+            ->get('/api/records/'.$record->hash_id);
 
         // dd($response->getContent());
 
@@ -118,7 +118,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->get('/api/records/'.$record->id);
+            ->get('/api/records/'.$record->hash_id);
 
         // dd($response->getContent());
 
@@ -146,7 +146,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->put('/api/records/'.$record->id, $data);
+            ->put('/api/records/'.$record->hash_id, $data);
 
         // dd($response->getContent());
 
@@ -174,7 +174,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->delete('/api/records/'.$record->id);
+            ->delete('/api/records/'.$record->hash_id);
 
         // dd($response->getContent());
 
@@ -201,7 +201,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->delete('/api/records/'.$record->id, $data);
+            ->delete('/api/records/'.$record->hash_id, $data);
 
         // dd($response->getContent());
 
@@ -224,7 +224,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->delete('/api/records/'.$record->id);
+            ->delete('/api/records/'.$record->hash_id);
 
         // dd($response->getContent());
 
