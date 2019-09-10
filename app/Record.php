@@ -42,6 +42,16 @@ class Record extends Model
      * @var array
      */
     protected $appends = [
-        'hash_id',
+        'code',
     ];
+
+    /**
+     * Get the hash id for the model.
+     *
+     * @return string
+     */
+    public function getCodeAttribute()
+    {
+        return $this->encode($this->attributes['id']);
+    }
 }

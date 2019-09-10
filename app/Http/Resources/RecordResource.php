@@ -16,7 +16,8 @@ class RecordResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'hash_id' => $this->hash_id,
+            'id' => $this->id,
+            'code' => $this->code,
             'name' => $this->name,
             'data' => Crypt::decrypt($this->data),
             'expires_in' => $this->expires_in,

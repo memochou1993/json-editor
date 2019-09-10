@@ -21,14 +21,4 @@ trait HashId
     {
         return (new Hashids('', 10))->decode($value);
     }
-
-    /**
-     * Get the hash id for the model.
-     *
-     * @return string
-     */
-    public function getHashIdAttribute()
-    {
-        return $this->encode($this->attributes['id']);
-    }
 }
