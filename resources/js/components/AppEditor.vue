@@ -10,18 +10,28 @@
       xs12
       class="pa-3"
     >
-      <div
-        ref="code"
-      />
+      <transition
+        name="fade"
+      >
+        <div
+          v-show="codeEditor"
+          ref="code"
+        />
+      </transition>
     </v-flex>
     <v-flex
       md6
       xs12
       class="pa-3"
     >
-      <div
-        ref="tree"
-      />
+      <transition
+        name="fade"
+      >
+        <div
+          v-show="treeEditor"
+          ref="tree"
+        />
+      </transition>
     </v-flex>
   </v-layout>
 </template>

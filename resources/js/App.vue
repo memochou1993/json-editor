@@ -38,4 +38,10 @@ export default {
   background-image: -o-linear-gradient(right, #061D30, #2C4C68);
   background-image: linear-gradient(to right, #061D30, #2C4C68);
 }
+.fade-enter {
+  opacity: 0.5;
+}
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
 </style>
