@@ -74,12 +74,12 @@ export default {
     },
   },
   created() {
-    this.setData(Cache.get('data') || JSON.stringify(this.initialData));
+    !this.code && this.setData(Cache.get('data') || JSON.stringify(this.initialData));
   },
   mounted() {
     this.initCodeEditor();
     this.initTreeEditor();
-    this.fetchData();
+    this.fetchData(this.code);
   },
   methods: {
     ...mapMutations('editor', [
@@ -89,6 +89,7 @@ export default {
     ...mapActions('editor', [
       'setData',
       'setError',
+      'fetchData',
     ]),
     initCodeEditor() {
       const codeEditor = this.initEditor(this.$refs.code, 'code');
@@ -131,16 +132,6 @@ export default {
         },
       });
     },
-    fetchData() {
-      this.code && this.axios.get(`/api/records/${this.code}`)
-        .then(({ data }) => {
-          this.setData(JSON.stringify(data.data));
-        })
-        .catch((error) => {
-          this.setError(error.message);
-          this.$router.push('/');
-        });
-    }
   },
 };
 </script>

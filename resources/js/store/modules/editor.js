@@ -1,3 +1,6 @@
+import axios from 'axios';
+import router from '@/router';
+
 export default {
   namespaced: true,
   state: {
@@ -31,5 +34,19 @@ export default {
     }, error) {
       commit('setError', typeof error === 'string' ? error : error.toString());
     },
+    fetchData({
+      state,
+      dispatch,
+    }, code) {
+      code && axios.get(`/records/${code}`)
+        .then(({ data }) => {
+          dispatch('setData', JSON.stringify(data.data));
+          state.codeEditor.set(data.data);
+          state.treeEditor.set(data.data);
+        })
+        .catch((error) => {
+          dispatch('setError', error.message) && router.push('/');
+        });
+    }
   },
 };
