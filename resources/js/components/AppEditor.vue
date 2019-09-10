@@ -63,6 +63,9 @@ export default {
       'data',
       'error',
     ]),
+    code() {
+      return this.$route.params.code;
+    },
   },
   watch: {
     data(value) {
@@ -76,6 +79,7 @@ export default {
   mounted() {
     this.initCodeEditor();
     this.initTreeEditor();
+    this.fetchData();
   },
   methods: {
     ...mapMutations('editor', [
@@ -127,6 +131,16 @@ export default {
         },
       });
     },
+    fetchData() {
+      this.code && this.axios.get(`/api/records/${this.code}`)
+        .then(({ data }) => {
+          this.setData(JSON.stringify(data.data));
+        })
+        .catch((error) => {
+          this.setError(error.message);
+          this.$router.push('/');
+        });
+    }
   },
 };
 </script>
