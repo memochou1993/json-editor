@@ -29,6 +29,9 @@ export default {
 </script>
 
 <style lang="scss">
+.pointer {
+  cursor: pointer;
+}
 .primary-gradient {
   background-image: -webkit-linear-gradient(right, #061D30, #2C4C68);
   background-image: -moz-linear-gradient(right, #061D30, #2C4C68);
