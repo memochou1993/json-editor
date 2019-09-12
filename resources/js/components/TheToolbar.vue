@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar
+    <v-toolbar
       dark
       class="primary primary-gradient"
     >
@@ -14,13 +14,24 @@
           JSON Editor
         </span>
       </v-toolbar-title>
-    </v-app-bar>
+      <v-spacer />
+      <v-toolbar-items>
+        <v-btn
+          text
+          @click="share()"
+        >
+          Share
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
   </div>
 </template>
 
 <script>
 import {
-  mapState, mapActions,
+  mapState,
+  mapMutations,
+  mapActions,
 } from 'vuex';
 
 export default {
@@ -31,6 +42,9 @@ export default {
     ]),
   },
   methods: {
+    ...mapMutations([
+      'setDialog',
+    ]),
     ...mapActions('editor', [
       'setData',
     ]),
@@ -38,6 +52,10 @@ export default {
       this.setData({});
       this.codeEditor.set({});
       this.treeEditor.set({});
+      this.$router.push('/');
+    },
+    share() {
+      this.setDialog('AppDialogShare');
     },
   },
 };

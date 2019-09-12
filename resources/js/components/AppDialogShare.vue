@@ -1,0 +1,113 @@
+<template>
+  <v-dialog
+    v-model="enabled"
+    :max-width="400"
+  >
+    <v-form
+      ref="form"
+      @submit.prevent="submit()"
+    >
+      <v-card>
+        <v-card-title>
+          <v-spacer />
+          <v-icon
+            @click="setEnabled(false)"
+          >
+            mdi-close
+          </v-icon>
+        </v-card-title>
+        <v-card-text>
+          <v-text-field
+            ref="name"
+            v-model="name"
+            type="text"
+            label="Name"
+            autofocus
+            autocomplete="off"
+          />
+        </v-card-text>
+        <v-divider />
+        <v-card-actions>
+          <v-btn
+            :disabled="loading"
+            text
+            color="blue-grey"
+            @click="$refs.form.reset()"
+          >
+            Clear
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            :disabled="!valid || loading"
+            text
+            type="submit"
+            color="blue-grey"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-form>
+  </v-dialog>
+</template>
+
+<script>
+import {
+  mapState,
+  mapMutations,
+  mapActions,
+} from 'vuex';
+
+export default {
+  data () {
+    return {
+      enabled: false,
+      name: '',
+    };
+  },
+  computed: {
+    ...mapState([
+      'loading',
+    ]),
+    ...mapState('editor', [
+      'data',
+    ]),
+    valid() {
+      return !!this.name.trim();
+    },
+    params() {
+      return {
+        name: this.name,
+        data: this.data,
+      };
+    },
+  },
+  watch: {
+    enabled(value) {
+      !value && this.setDialog('');
+    },
+  },
+  created() {
+    this.setEnabled(true);
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.name.focus();
+    }, 0);
+  },
+  methods: {
+    ...mapMutations([
+      'setDialog',
+    ]),
+    ...mapActions('editor', [
+      'storeData',
+    ]),
+    setEnabled(enabled) {
+      this.enabled = enabled;
+    },
+    submit() {
+      this.storeData(this.params);
+    },
+  },
+};
+</script>

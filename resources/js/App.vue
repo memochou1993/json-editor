@@ -12,18 +12,21 @@
       </v-container>
     </v-content>
     <TheFooter />
+    <TheDialogRegistrar />
   </v-app>
 </template>
 
 <script>
 import TheToolbar from '@/components/TheToolbar.vue';
 import TheFooter from '@/components/TheFooter.vue';
+import TheDialogRegistrar from '@/components/TheDialogRegistrar';
 
 export default {
   name: 'App',
   components: {
     TheToolbar,
     TheFooter,
+    TheDialogRegistrar,
   },
 };
 </script>

@@ -6,6 +6,7 @@ export default {
   state: {
     codeEditor: null,
     treeEditor: null,
+    code: '',
     data: {},
     error: '',
   },
@@ -15,6 +16,9 @@ export default {
     },
     setTreeEditor(state, treeEditor) {
       state.treeEditor = treeEditor;
+    },
+    setCode(state, code) {
+      state.code = code;
     },
     setData(state, data) {
       state.data = data;
@@ -47,6 +51,18 @@ export default {
         .catch((error) => {
           dispatch('setError', error.message) && router.push('/');
         });
-    }
+    },
+    storeData({
+      dispatch,
+    }, params) {
+      axios.post(`/records`, params)
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          dispatch('setError', error.message) && router.push('/');
+        });
+    },
   },
 };

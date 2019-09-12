@@ -8,7 +8,7 @@
     <v-flex
       md6
       xs12
-      class="pa-3"
+      class="pa-5"
     >
       <transition
         name="fade"
@@ -22,7 +22,7 @@
     <v-flex
       md6
       xs12
-      class="pa-3"
+      class="pa-5"
     >
       <transition
         name="fade"
@@ -38,7 +38,9 @@
 
 <script>
 import {
-  mapState, mapMutations, mapActions,
+  mapState,
+  mapMutations,
+  mapActions,
 } from 'vuex';
 import JsonEditor from 'jsoneditor';
 import VanillaPicker from 'jsoneditor/src/js/vanilla-picker';
@@ -70,12 +72,10 @@ export default {
     ...mapState('editor', [
       'codeEditor',
       'treeEditor',
+      'code',
       'data',
       'error',
     ]),
-    code() {
-      return this.$route.params.code;
-    },
   },
   watch: {
     data(value) {
@@ -84,6 +84,7 @@ export default {
     },
   },
   created() {
+    this.setCode(this.$route.params.code || '');
     !this.code && this.setData(Cache.get('data') || JSON.stringify(this.initialData));
   },
   mounted() {
@@ -95,6 +96,7 @@ export default {
     ...mapMutations('editor', [
       'setCodeEditor',
       'setTreeEditor',
+      'setCode',
     ]),
     ...mapActions('editor', [
       'setData',
