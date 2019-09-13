@@ -31,15 +31,16 @@ export default {
     setData({
       commit,
     }, data) {
+      console.log(data);
       commit('setData', typeof data === 'string' ? JSON.parse(data) : data);
     },
     fetchData({
       state,
       commit,
       dispatch,
-    }, code) {
-      code && commit('setLoading', true, { root: true });
-      code && axios.get(`/records/${code}`)
+    }) {
+      commit('setLoading', true, { root: true });
+      axios.get(`/records/${state.code}`)
         .then(({ data }) => {
           dispatch('setData', JSON.stringify(data.data));
           state.codeEditor.set(data.data);
@@ -59,11 +60,31 @@ export default {
       commit,
     }, params) {
       commit('setLoading', true, { root: true });
-      axios.post(`/records`, params)
+      axios.post('/records', params)
         .then(({ data }) => {
           setTimeout(() => {
             router.push(`/editor/${data.code}`);
             commit('setDialog', 'AppDialogShare', { root: true });
+          }, 1 * 1000);
+        })
+        .catch((error) => {
+          commit('setError', error, { root: true });
+        })
+        .finally(() => {
+          setTimeout(() => {
+            commit('setLoading', false, { root: true });
+          }, 1 * 1000);
+        });
+    },
+    updateData({
+      state,
+      commit,
+    }, params) {
+      commit('setLoading', true, { root: true });
+      axios.put(`/records/${state.code}`, params)
+        .then(() => {
+          setTimeout(() => {
+            commit('setDialog', '', { root: true });
           }, 1 * 1000);
         })
         .catch((error) => {

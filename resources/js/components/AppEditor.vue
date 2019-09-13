@@ -49,7 +49,7 @@ import Cache from '@/helpers/Cache';
 export default {
   data() {
     return {
-      initialData: {
+      initialData: Cache.get('data') || {
         array: [
           1,
           2,
@@ -85,12 +85,11 @@ export default {
   },
   created() {
     this.setCode(this.$route.params.code || '');
-    !this.code && this.setData(Cache.get('data') || JSON.stringify(this.initialData));
+    this.code ? this.fetchData() : this.setData(this.initialData);
   },
   mounted() {
     this.initCodeEditor();
     this.initTreeEditor();
-    this.fetchData(this.code);
   },
   methods: {
     ...mapMutations('editor', [

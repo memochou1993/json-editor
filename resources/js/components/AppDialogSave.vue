@@ -120,6 +120,7 @@ export default {
     ]),
     ...mapActions('editor', [
       'storeData',
+      'updateData',
     ]),
     setEnabled(enabled) {
       this.enabled = enabled;
