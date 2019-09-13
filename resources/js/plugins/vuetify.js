@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
+import colors from 'vuetify/lib/util/colors';
 import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.css';
 
@@ -10,6 +11,7 @@ export default new Vuetify({
     themes: {
       light: {
         primary: '#061D30',
+        secondary: colors.blueGrey,
       },
     },
   },

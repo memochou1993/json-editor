@@ -28,7 +28,8 @@
             ref="name"
             v-model="name"
             :loading="loading"
-            color="blue-grey"
+            :readonly="loading"
+            color="secondary"
             label="Name"
             autofocus
             autocomplete="off"
@@ -39,7 +40,7 @@
           <v-btn
             :disabled="loading"
             text
-            color="blue-grey"
+            color="secondary"
             @click="$refs.form.reset()"
           >
             Clear
@@ -49,7 +50,7 @@
             :disabled="!valid || loading"
             text
             type="submit"
-            color="blue-grey"
+            color="secondary"
           >
             Save
           </v-btn>
@@ -134,7 +135,7 @@ export default {
     createRecord() {
       this.storeRecord(this.params)
         .then((data) => {
-          this.setDialog('AppDialogShare');
+          this.setDialog('');
           this.$router.push(`/e/${data.code}`);
         });
     },

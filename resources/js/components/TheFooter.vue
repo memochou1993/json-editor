@@ -24,7 +24,7 @@
 export default {
   methods: {
     explore() {
-      window.open('https://github.com/memochou1993/json-vue', '_blank');
+      window.open('https://github.com/memochou1993/json-vue', '_blank', 'noopener noreferrer');
     },
   },
 };

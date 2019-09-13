@@ -7,40 +7,43 @@
       <v-card-title />
       <v-card-text>
         <v-text-field
+          ref="editor"
           :value="links.editor"
           label="Editor"
           outlined
           readonly
-          hide-details
           append-icon="mdi-content-copy"
-          color="blue-grey"
+          hide-details
+          color="secondary"
           class="my-3"
-          @click:append="copy()"
           @focus="$event.target.select()"
+          @click:append="copy($refs.editor)"
         />
         <v-text-field
+          ref="response"
           :value="links.response"
           label="Response"
           outlined
           readonly
+          append-icon="mdi-content-copy"
           hide-details
-          append-icon="mdi-share-variant"
-          color="blue-grey"
+          color="secondary"
           class="my-3"
-          @click:append="open()"
           @focus="$event.target.select()"
+          @click:append="copy($refs.response)"
         />
         <v-text-field
+          ref="file"
           :value="links.file"
           label="File"
           outlined
           readonly
+          append-icon="mdi-content-copy"
           hide-details
-          append-icon="mdi-download"
-          color="blue-grey"
+          color="secondary"
           class="my-3"
-          @click:append="download()"
           @focus="$event.target.select()"
+          @click:append="copy($refs.file)"
         />
       </v-card-text>
     </v-card>
@@ -86,14 +89,9 @@ export default {
     setEnabled(enabled) {
       this.enabled = enabled;
     },
-    copy() {
-      //
-    },
-    open() {
-      //
-    },
-    download() {
-      //
+    copy(element) {
+      element.focus();
+      document.execCommand('copy');
     },
   },
 };
