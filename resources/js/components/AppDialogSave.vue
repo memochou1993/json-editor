@@ -17,6 +17,13 @@
           </v-icon>
         </v-card-title>
         <v-card-text>
+          <v-alert
+            v-if="error"
+            type="error"
+            text
+          >
+            {{ message }}
+          </v-alert>
           <v-text-field
             ref="name"
             v-model="name"
@@ -71,9 +78,19 @@ export default {
     ]),
     ...mapState('editor', [
       'data',
+      'error',
     ]),
     valid() {
       return !!this.name.trim();
+    },
+    message() {
+      if (!this.error) {
+        return '';
+      }
+      if (this.error.response) {
+        return this.error.response.data.message;
+      }
+      return this.error.message;
     },
     params() {
       return {

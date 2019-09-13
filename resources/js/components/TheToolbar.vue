@@ -17,6 +17,7 @@
       <v-spacer />
       <v-toolbar-items>
         <v-btn
+          :disabled="!Object.values(data).length"
           text
           @click="save()"
         >
@@ -39,6 +40,8 @@ export default {
     ...mapState('editor', [
       'codeEditor',
       'treeEditor',
+      'code',
+      'data',
     ]),
   },
   methods: {
@@ -52,7 +55,7 @@ export default {
       this.setData({});
       this.codeEditor.set({});
       this.treeEditor.set({});
-      this.$router.push('/');
+      this.code && this.$router.push('/');
     },
     save() {
       this.setDialog('AppDialogSave');

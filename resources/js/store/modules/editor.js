@@ -8,7 +8,7 @@ export default {
     treeEditor: null,
     code: '',
     data: {},
-    error: '',
+    error: null,
   },
   mutations: {
     setCodeEditor(state, codeEditor) {
@@ -33,13 +33,9 @@ export default {
     }, data) {
       commit('setData', typeof data === 'string' ? JSON.parse(data) : data);
     },
-    setError({
-      commit,
-    }, error) {
-      commit('setError', typeof error === 'string' ? error : error.toString());
-    },
     fetchData({
       state,
+      commit,
       dispatch,
     }, code) {
       code && axios.get(`/records/${code}`)
@@ -49,19 +45,19 @@ export default {
           state.treeEditor.set(data.data);
         })
         .catch((error) => {
-          dispatch('setError', error.message) && router.push('/');
+          router.push('/');
+          commit('setError', error);
         });
     },
     storeData({
-      dispatch,
+      commit,
     }, params) {
       axios.post(`/records`, params)
         .then(({ data }) => {
           console.log(data);
         })
         .catch((error) => {
-          console.log(error.response);
-          dispatch('setError', error.message) && router.push('/');
+          commit('setError', error);
         });
     },
   },
