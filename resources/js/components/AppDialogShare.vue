@@ -36,7 +36,7 @@
           ref="download"
           :value="links.download"
           color="secondary"
-          label="File"
+          label="Download"
           outlined
           readonly
           append-icon="mdi-content-copy"

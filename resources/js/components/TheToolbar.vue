@@ -26,6 +26,13 @@
         <v-btn
           :disabled="!record || loading"
           text
+          @click="download()"
+        >
+          Download
+        </v-btn>
+        <v-btn
+          :disabled="!record || loading"
+          text
           @click="share()"
         >
           Share
@@ -75,6 +82,9 @@ export default {
     },
     save() {
       this.setDialog('AppDialogSave');
+    },
+    download() {
+      window.location.href = `/download/${this.record.code}`;
     },
     share() {
       this.setDialog('AppDialogShare');
