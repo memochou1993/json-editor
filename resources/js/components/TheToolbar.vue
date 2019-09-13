@@ -8,8 +8,8 @@
         class="headline"
       >
         <span
-          class="pointer"
-          @click="initialize()"
+          class="pointer mx-2"
+          @click="$router.push('/')"
         >
           JSON Editor
         </span>
@@ -36,6 +36,13 @@
           @click="share()"
         >
           Share
+        </v-btn>
+        <v-btn
+          :disabled="!Object.values(data).length || loading"
+          text
+          @click="reset()"
+        >
+          Reset
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -73,13 +80,6 @@ export default {
     ...mapActions('editor', [
       'setData',
     ]),
-    initialize() {
-      this.setRecord(null);
-      this.setData({});
-      this.codeEditor.set({});
-      this.treeEditor.set({});
-      this.$route.path === '/' || this.$router.push('/');
-    },
     save() {
       this.setDialog('AppDialogSave');
     },
@@ -88,6 +88,13 @@ export default {
     },
     share() {
       this.setDialog('AppDialogShare');
+    },
+    reset() {
+      this.setRecord(null);
+      this.setData({});
+      this.codeEditor.set({});
+      this.treeEditor.set({});
+      this.$route.path === '/' || this.$router.push('/');
     },
   },
 };
