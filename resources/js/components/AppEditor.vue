@@ -14,7 +14,7 @@
         name="fade"
       >
         <div
-          v-show="codeEditor"
+          v-show="codeEditor && loaded"
           ref="code"
         />
       </transition>
@@ -28,7 +28,7 @@
         name="fade"
       >
         <div
-          v-show="treeEditor"
+          v-show="treeEditor && loaded"
           ref="tree"
         />
       </transition>
@@ -66,6 +66,7 @@ export default {
         },
         string: 'Hello World',
       },
+      loaded: false,
     };
   },
   computed: {
@@ -86,7 +87,7 @@ export default {
     },
   },
   created() {
-    this.code ? this.fetchData(this.code) : this.setData(this.initialData);
+    this.code ? this.getData() : this.setData(this.initialData);
   },
   mounted() {
     this.initCodeEditor();
@@ -103,6 +104,9 @@ export default {
       'setData',
       'fetchData',
     ]),
+    setLoaded(loaded) {
+      this.loaded = loaded;
+    },
     initCodeEditor() {
       const codeEditor = this.initEditor(this.$refs.code, 'code');
       this.setCodeEditor(codeEditor);
@@ -143,6 +147,12 @@ export default {
           this.setError(error.toString());
         },
       });
+    },
+    getData() {
+      this.fetchData(this.code)
+        .then(() => {
+          this.setLoaded(true);
+        });
     },
   },
 };

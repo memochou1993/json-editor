@@ -1,5 +1,6 @@
 import axios from 'axios';
 import router from '@/router';
+import Common from '@/helpers/Common';
 
 export default {
   namespaced: true,
@@ -39,45 +40,48 @@ export default {
       dispatch,
     }, code) {
       commit('setLoading', true, { root: true });
-      axios.get(`/records/${code}`)
-        .then(({ data }) => {
-          commit('setRecord', data);
-          dispatch('setData', data.data);
-          state.codeEditor.set(data.data);
-          state.treeEditor.set(data.data);
-        })
-        .catch((error) => {
-          router.push('/editor');
-          commit('setError', error, { root: true });
-        })
-        .finally(() => {
-          setTimeout(() => {
+      return new Promise((resolve, reject) => {
+        axios.get(`/records/${code}`)
+          .then(({ data }) => {
+            commit('setRecord', data);
+            dispatch('setData', data.data);
+            state.codeEditor.set(data.data);
+            state.treeEditor.set(data.data);
+            resolve(data);
+          })
+          .catch((error) => {
+            router.push('/editor');
+            commit('setError', error, { root: true });
+            reject(error);
+          })
+          .finally(() => {
             commit('setLoading', false, { root: true });
-          }, 0 * 1000);
-        });
+          });
+      });
     },
     storeData({
       commit,
       dispatch,
     }, params) {
       commit('setLoading', true, { root: true });
-      axios.post('/records', params)
-        .then(({ data }) => {
-          setTimeout(() => {
-            router.push(`/editor/${data.code}`);
-            commit('setRecord', data);
-            dispatch('setData', data.data);
-            commit('setDialog', 'AppDialogShare', { root: true });
-          }, 1 * 1000);
-        })
-        .catch((error) => {
-          commit('setError', error, { root: true });
-        })
-        .finally(() => {
-          setTimeout(() => {
+      return new Promise((resolve, reject) => {
+        axios.post('/records', params)
+          .then(async ({ data }) => {
+            await Common.defer(1);
+            await commit('setRecord', data);
+            await dispatch('setData', data.data);
+            await commit('setDialog', 'AppDialogShare', { root: true });
+            await router.push(`/editor/${data.code}`);
+            resolve(data);
+          })
+          .catch((error) => {
+            commit('setError', error, { root: true });
+            reject(error);
+          })
+          .finally(() => {
             commit('setLoading', false, { root: true });
-          }, 1 * 1000);
-        });
+          });
+      });
     },
     updateData({
       state,
@@ -85,22 +89,23 @@ export default {
       dispatch,
     }, params) {
       commit('setLoading', true, { root: true });
-      axios.put(`/records/${state.record.code}`, params)
-        .then(({ data }) => {
-          setTimeout(() => {
-            commit('setRecord', data);
-            dispatch('setData', data.data);
-            commit('setDialog', '', { root: true });
-          }, 1 * 1000);
-        })
-        .catch((error) => {
-          commit('setError', error, { root: true });
-        })
-        .finally(() => {
-          setTimeout(() => {
+      return new Promise((resolve, reject) => {
+        axios.put(`/records/${state.record.code}`, params)
+          .then(async ({ data }) => {
+            await Common.defer(1);
+            await commit('setRecord', data);
+            await dispatch('setData', data.data);
+            await commit('setDialog', '', { root: true });
+            resolve(data);
+          })
+          .catch((error) => {
+            commit('setError', error, { root: true });
+            reject(error);
+          })
+          .finally(() => {
             commit('setLoading', false, { root: true });
-          }, 1 * 1000);
-        });
+          });
+      });
     },
   },
 };
