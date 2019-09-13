@@ -8,19 +8,12 @@
       @submit.prevent="submit()"
     >
       <v-card>
-        <v-card-title>
-          <v-spacer />
-          <v-icon
-            @click="setEnabled(false)"
-          >
-            mdi-close
-          </v-icon>
-        </v-card-title>
+        <v-card-title />
         <v-card-text>
           <v-alert
             v-if="error"
-            type="error"
             text
+            type="error"
           >
             {{ message }}
           </v-alert>
@@ -33,12 +26,14 @@
             label="Name"
             autofocus
             autocomplete="off"
+            hide-details
+            class="my-3"
           />
         </v-card-text>
         <v-divider />
         <v-card-actions>
           <v-btn
-            :disabled="loading"
+            :disabled="!valid || loading"
             text
             color="secondary"
             @click="$refs.form.reset()"
@@ -86,7 +81,7 @@ export default {
       'record',
     ]),
     valid() {
-      return !!this.name.trim();
+      return this.name && this.name.trim();
     },
     message() {
       if (!this.error) {

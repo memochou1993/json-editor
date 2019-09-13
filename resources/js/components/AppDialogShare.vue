@@ -9,12 +9,12 @@
         <v-text-field
           ref="editor"
           :value="links.editor"
+          color="secondary"
           label="Editor"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
-          color="secondary"
           class="my-3"
           @focus="$event.target.select()"
           @click:append="copy($refs.editor)"
@@ -22,12 +22,12 @@
         <v-text-field
           ref="response"
           :value="links.response"
+          color="secondary"
           label="Response"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
-          color="secondary"
           class="my-3"
           @focus="$event.target.select()"
           @click:append="copy($refs.response)"
@@ -35,12 +35,12 @@
         <v-text-field
           ref="file"
           :value="links.file"
+          color="secondary"
           label="File"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
-          color="secondary"
           class="my-3"
           @focus="$event.target.select()"
           @click:append="copy($refs.file)"

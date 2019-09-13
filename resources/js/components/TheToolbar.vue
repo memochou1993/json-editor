@@ -71,7 +71,7 @@ export default {
       this.setData({});
       this.codeEditor.set({});
       this.treeEditor.set({});
-      this.$route.path !== '/' && this.$router.push('/');
+      this.$route.path === '/' || this.$router.push('/');
     },
     save() {
       this.setDialog('AppDialogSave');
