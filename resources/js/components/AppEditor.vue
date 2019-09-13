@@ -87,7 +87,7 @@ export default {
     },
   },
   created() {
-    this.code ? this.getData() : this.initData();
+    this.code ? this.getRecord() : this.initData();
   },
   mounted() {
     this.initCodeEditor();
@@ -152,9 +152,16 @@ export default {
       this.setData(this.initialData);
       this.setLoaded(true);
     },
-    getData() {
+    getRecord() {
       this.fetchRecord(this.code)
-        .then(() => {
+        .then((data) => {
+          this.codeEditor.set(data.data);
+          this.treeEditor.set(data.data);
+        })
+        .catch(() => {
+          this.$router.push('/');
+        })
+        .finally(() => {
           this.setLoaded(true);
         });
     },

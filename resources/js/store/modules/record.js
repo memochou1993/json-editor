@@ -1,5 +1,4 @@
 import axios from 'axios';
-import router from '@/router';
 import Common from '@/helpers/Common';
 
 export default {
@@ -42,15 +41,13 @@ export default {
       commit('setLoading', true, { root: true });
       return new Promise((resolve, reject) => {
         axios.get(`/records/${code}`)
-          .then(({ data }) => {
+          .then(async ({ data }) => {
+            await Common.defer(0);
             commit('setRecord', data);
             dispatch('setData', data.data);
-            state.codeEditor.set(data.data);
-            state.treeEditor.set(data.data);
             resolve(data);
           })
           .catch((error) => {
-            router.push('/editor');
             commit('setError', error, { root: true });
             reject(error);
           })
@@ -61,17 +58,13 @@ export default {
     },
     storeRecord({
       commit,
-      dispatch,
     }, params) {
       commit('setLoading', true, { root: true });
       return new Promise((resolve, reject) => {
         axios.post('/records', params)
           .then(async ({ data }) => {
             await Common.defer(1);
-            await commit('setRecord', data);
-            await dispatch('setData', data.data);
-            await commit('setDialog', 'AppDialogShare', { root: true });
-            await router.push(`/editor/${data.code}`);
+            commit('setRecord', data);
             resolve(data);
           })
           .catch((error) => {
@@ -86,16 +79,13 @@ export default {
     updateRecord({
       state,
       commit,
-      dispatch,
     }, params) {
       commit('setLoading', true, { root: true });
       return new Promise((resolve, reject) => {
         axios.put(`/records/${state.record.code}`, params)
           .then(async ({ data }) => {
             await Common.defer(1);
-            await commit('setRecord', data);
-            await dispatch('setData', data.data);
-            await commit('setDialog', '', { root: true });
+            commit('setRecord', data);
             resolve(data);
           })
           .catch((error) => {

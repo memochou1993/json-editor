@@ -129,10 +129,25 @@ export default {
       this.name = name;
     },
     fill() {
-      this.record && this.setName(this.record.name);
+      if (this.record) {
+        this.setName(this.record.name);
+      }
     },
     submit() {
-      this.record ? this.updateRecord(this.params) : this.storeRecord(this.params);
+      this.record ? this.editRecord() : this.createRecord();
+    },
+    createRecord() {
+      this.storeRecord(this.params)
+        .then((data) => {
+          this.setDialog('AppDialogShare');
+          this.$router.push(`/editor/${data.code}`);
+        });
+    },
+    editRecord() {
+      this.updateRecord(this.params)
+        .then(() => {
+          this.setDialog('');
+        })
     },
   },
 };
