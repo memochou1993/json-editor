@@ -13,6 +13,7 @@
           readonly
           hide-details
           append-icon="mdi-content-copy"
+          color="blue-grey"
           class="my-3"
           @click:append="copy()"
           @focus="$event.target.select()"
@@ -24,6 +25,7 @@
           readonly
           hide-details
           append-icon="mdi-share-variant"
+          color="blue-grey"
           class="my-3"
           @click:append="open()"
           @focus="$event.target.select()"
@@ -35,6 +37,7 @@
           readonly
           hide-details
           append-icon="mdi-download"
+          color="blue-grey"
           class="my-3"
           @click:append="download()"
           @focus="$event.target.select()"

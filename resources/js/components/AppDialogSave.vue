@@ -28,6 +28,7 @@
             ref="name"
             v-model="name"
             :loading="loading"
+            color="blue-grey"
             label="Name"
             autofocus
             autocomplete="off"
