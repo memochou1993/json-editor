@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import editor from '@/store/modules/editor';
 import record from '@/store/modules/record';
 
 Vue.use(Vuex);
@@ -7,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   namespaced: true,
   modules: {
+    editor,
     record,
   },
   state: {

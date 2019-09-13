@@ -77,9 +77,11 @@ export default {
       'error',
       'loading',
     ]),
+    ...mapState('editor', [
+      'data',
+    ]),
     ...mapState('record', [
       'record',
-      'data',
     ]),
     valid() {
       return !!this.name.trim();

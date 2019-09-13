@@ -70,7 +70,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('record', [
+    ...mapState('editor', [
       'error',
       'codeEditor',
       'treeEditor',
@@ -94,14 +94,15 @@ export default {
     this.initTreeEditor();
   },
   methods: {
-    ...mapMutations('record', [
+    ...mapMutations('editor', [
       'setError',
       'setCodeEditor',
       'setTreeEditor',
-      'setCode',
+    ]),
+    ...mapActions('editor', [
+      'setData',
     ]),
     ...mapActions('record', [
-      'setData',
       'fetchRecord',
     ]),
     setLoaded(loaded) {
@@ -155,6 +156,7 @@ export default {
     getRecord() {
       this.fetchRecord(this.code)
         .then((data) => {
+          this.setData(data.data);
           this.codeEditor.set(data.data);
           this.treeEditor.set(data.data);
         })

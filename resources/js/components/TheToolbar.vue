@@ -47,11 +47,13 @@ export default {
     ...mapState([
       'loading',
     ]),
-    ...mapState('record', [
+    ...mapState('editor', [
       'codeEditor',
       'treeEditor',
-      'record',
       'data',
+    ]),
+    ...mapState('record', [
+      'record',
     ]),
   },
   methods: {
@@ -61,7 +63,7 @@ export default {
     ...mapMutations('record', [
       'setRecord',
     ]),
-    ...mapActions('record', [
+    ...mapActions('editor', [
       'setData',
     ]),
     initialize() {
