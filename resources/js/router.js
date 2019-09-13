@@ -12,7 +12,7 @@ export default new VueRouter({
       component: () => import('@/views/Home.vue'),
     },
     {
-      path: '/editor/:code?',
+      path: '/edit/:code?',
       redirect: {
         name: 'home',
       },

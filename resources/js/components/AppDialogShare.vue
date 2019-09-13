@@ -7,21 +7,21 @@
       <v-card-title />
       <v-card-text>
         <v-text-field
-          ref="editor"
-          :value="links.editor"
+          ref="edit"
+          :value="links.edit"
           color="secondary"
-          label="Editor"
+          label="Edit"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
           class="my-3"
           @focus="$event.target.select()"
-          @click:append="copy($refs.editor)"
+          @click:append="copy($refs.edit)"
         />
         <v-text-field
-          ref="json"
-          :value="links.json"
+          ref="response"
+          :value="links.response"
           color="secondary"
           label="Response"
           outlined
@@ -30,11 +30,11 @@
           hide-details
           class="my-3"
           @focus="$event.target.select()"
-          @click:append="copy($refs.json)"
+          @click:append="copy($refs.response)"
         />
         <v-text-field
-          ref="file"
-          :value="links.file"
+          ref="download"
+          :value="links.download"
           color="secondary"
           label="File"
           outlined
@@ -43,7 +43,7 @@
           hide-details
           class="my-3"
           @focus="$event.target.select()"
-          @click:append="copy($refs.file)"
+          @click:append="copy($refs.download)"
         />
       </v-card-text>
     </v-card>
@@ -68,9 +68,9 @@ export default {
     ]),
     links() {
       return {
-        editor: `${location.host}/editor/${this.record.code}`,
-        json: `${location.host}/json/${this.record.code}`,
-        file: `${location.host}/file/${this.record.code}`,
+        edit: `${location.host}/edit/${this.record.code}`,
+        response: `${location.host}/response/${this.record.code}`,
+        download: `${location.host}/download/${this.record.code}`,
       };
     },
   },
