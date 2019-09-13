@@ -131,7 +131,7 @@ export default {
       this.storeRecord(this.params)
         .then((data) => {
           this.setDialog('');
-          this.$router.push(`/e/${data.code}`);
+          this.$router.push(`/${data.code}`);
         });
     },
     editRecord() {

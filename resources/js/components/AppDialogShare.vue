@@ -20,8 +20,8 @@
           @click:append="copy($refs.editor)"
         />
         <v-text-field
-          ref="response"
-          :value="links.response"
+          ref="json"
+          :value="links.json"
           color="secondary"
           label="Response"
           outlined
@@ -30,7 +30,7 @@
           hide-details
           class="my-3"
           @focus="$event.target.select()"
-          @click:append="copy($refs.response)"
+          @click:append="copy($refs.json)"
         />
         <v-text-field
           ref="file"
@@ -68,9 +68,9 @@ export default {
     ]),
     links() {
       return {
-        editor: `${location.host}/e/${this.record.code}`,
-        response: `${location.host}/r/${this.record.code}`,
-        file: `${location.host}/f/${this.record.code}`,
+        editor: `${location.host}/editor/${this.record.code}`,
+        json: `${location.host}/json/${this.record.code}`,
+        file: `${location.host}/file/${this.record.code}`,
       };
     },
   },
