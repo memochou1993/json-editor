@@ -34,7 +34,7 @@ export default {
     }, data) {
       commit('setData', typeof data === 'string' ? JSON.parse(data) : data);
     },
-    fetchData({
+    fetchRecord({
       state,
       commit,
       dispatch,
@@ -59,7 +59,7 @@ export default {
           });
       });
     },
-    storeData({
+    storeRecord({
       commit,
       dispatch,
     }, params) {
@@ -83,7 +83,7 @@ export default {
           });
       });
     },
-    updateData({
+    updateRecord({
       state,
       commit,
       dispatch,

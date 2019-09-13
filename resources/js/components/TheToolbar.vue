@@ -47,7 +47,7 @@ export default {
     ...mapState([
       'loading',
     ]),
-    ...mapState('editor', [
+    ...mapState('record', [
       'codeEditor',
       'treeEditor',
       'record',
@@ -58,10 +58,10 @@ export default {
     ...mapMutations([
       'setDialog',
     ]),
-    ...mapMutations('editor', [
+    ...mapMutations('record', [
       'setRecord',
     ]),
-    ...mapActions('editor', [
+    ...mapActions('record', [
       'setData',
     ]),
     initialize() {

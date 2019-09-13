@@ -77,7 +77,7 @@ export default {
       'error',
       'loading',
     ]),
-    ...mapState('editor', [
+    ...mapState('record', [
       'record',
       'data',
     ]),
@@ -118,9 +118,9 @@ export default {
     ...mapMutations([
       'setDialog',
     ]),
-    ...mapActions('editor', [
-      'storeData',
-      'updateData',
+    ...mapActions('record', [
+      'storeRecord',
+      'updateRecord',
     ]),
     setEnabled(enabled) {
       this.enabled = enabled;
@@ -132,7 +132,7 @@ export default {
       this.record && this.setName(this.record.name);
     },
     submit() {
-      this.record ? this.updateData(this.params) : this.storeData(this.params);
+      this.record ? this.updateRecord(this.params) : this.storeRecord(this.params);
     },
   },
 };

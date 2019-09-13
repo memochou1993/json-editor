@@ -34,7 +34,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('editor', [
+    ...mapState('record', [
       'record',
     ]),
     links() {
