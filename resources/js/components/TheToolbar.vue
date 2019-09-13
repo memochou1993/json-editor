@@ -18,9 +18,9 @@
       <v-toolbar-items>
         <v-btn
           text
-          @click="share()"
+          @click="save()"
         >
-          Share
+          Save
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -54,8 +54,8 @@ export default {
       this.treeEditor.set({});
       this.$router.push('/');
     },
-    share() {
-      this.setDialog('AppDialogShare');
+    save() {
+      this.setDialog('AppDialogSave');
     },
   },
 };

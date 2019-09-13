@@ -8,11 +8,11 @@
 import {
   mapState,
 } from 'vuex';
-import AppDialogShare from '@/components/AppDialogShare';
+import AppDialogSave from '@/components/AppDialogSave';
 
 export default {
   components: {
-    AppDialogShare,
+    AppDialogSave,
   },
   computed: {
     ...mapState([
