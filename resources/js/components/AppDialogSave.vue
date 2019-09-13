@@ -130,19 +130,11 @@ export default {
     setName(name) {
       this.name = name;
     },
-    fill() {
-      if (this.record) {
-        this.setName(this.record.name);
-      }
-    },
-    submit() {
-      this.record ? this.editRecord() : this.createRecord();
-    },
     createRecord() {
       this.storeRecord(this.params)
         .then((data) => {
           this.setDialog('AppDialogShare');
-          this.$router.push(`/editor/${data.code}`);
+          this.$router.push(`/e/${data.code}`);
         });
     },
     editRecord() {
@@ -150,6 +142,14 @@ export default {
         .then(() => {
           this.setDialog('');
         })
+    },
+    fill() {
+      if (this.record) {
+        this.setName(this.record.name);
+      }
+    },
+    submit() {
+      this.record ? this.editRecord() : this.createRecord();
     },
   },
 };

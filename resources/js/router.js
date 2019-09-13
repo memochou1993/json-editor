@@ -11,7 +11,7 @@ export default new VueRouter({
       component: () => import('@/views/Home.vue'),
     },
     {
-      path: '/editor/:code?',
+      path: '/e/:code?',
       name: 'home',
       component: () => import('@/views/Home.vue'),
     },

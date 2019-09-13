@@ -4,18 +4,41 @@
     :max-width="400"
   >
     <v-card>
-      <v-card-title>
-        <v-spacer />
-        <v-icon
-          @click="setEnabled(false)"
-        >
-          mdi-close
-        </v-icon>
-      </v-card-title>
+      <v-card-title />
       <v-card-text>
-        {{ links.editor }}
-        {{ links.response }}
-        {{ links.file }}
+        <v-text-field
+          :value="links.editor"
+          label="Editor"
+          outlined
+          readonly
+          hide-details
+          append-icon="mdi-content-copy"
+          class="my-3"
+          @click:append="copy()"
+          @focus="$event.target.select()"
+        />
+        <v-text-field
+          :value="links.response"
+          label="Response"
+          outlined
+          readonly
+          hide-details
+          append-icon="mdi-share-variant"
+          class="my-3"
+          @click:append="open()"
+          @focus="$event.target.select()"
+        />
+        <v-text-field
+          :value="links.file"
+          label="File"
+          outlined
+          readonly
+          hide-details
+          append-icon="mdi-download"
+          class="my-3"
+          @click:append="download()"
+          @focus="$event.target.select()"
+        />
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -39,9 +62,9 @@ export default {
     ]),
     links() {
       return {
-        editor: `${location.host}/editor/${this.record.code}`,
-        response: `${location.host}/response/${this.record.code}`,
-        file: `${location.host}/file/${this.record.code}`,
+        editor: `${location.host}/e/${this.record.code}`,
+        response: `${location.host}/r/${this.record.code}`,
+        file: `${location.host}/f/${this.record.code}`,
       };
     },
   },
@@ -59,6 +82,15 @@ export default {
     ]),
     setEnabled(enabled) {
       this.enabled = enabled;
+    },
+    copy() {
+      //
+    },
+    open() {
+      //
+    },
+    download() {
+      //
     },
   },
 };

@@ -67,11 +67,11 @@ export default {
       'setData',
     ]),
     initialize() {
-      this.record && this.$router.push('/editor');
       this.setRecord(null);
       this.setData({});
       this.codeEditor.set({});
       this.treeEditor.set({});
+      this.$route.path !== '/' && this.$router.push('/');
     },
     save() {
       this.setDialog('AppDialogSave');
