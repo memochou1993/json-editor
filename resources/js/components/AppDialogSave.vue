@@ -74,11 +74,11 @@ export default {
   },
   computed: {
     ...mapState([
+      'error',
       'loading',
     ]),
     ...mapState('editor', [
       'data',
-      'error',
     ]),
     valid() {
       return !!this.name.trim();

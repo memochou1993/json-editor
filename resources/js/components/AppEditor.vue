@@ -1,39 +1,53 @@
 <template>
-  <v-layout
-    row
-    wrap
-    align-center
-    justify-center
-  >
-    <v-flex
-      md6
-      xs12
-      class="pa-5"
+  <div>
+    <v-layout>
+      <v-flex>
+        <v-snackbar
+          v-if="error"
+          v-model="alert"
+          color="warning"
+          right
+        >
+          {{ error }}
+        </v-snackbar>
+      </v-flex>
+    </v-layout>
+    <v-layout
+      row
+      wrap
+      align-center
+      justify-center
     >
-      <transition
-        name="fade"
+      <v-flex
+        md6
+        xs12
+        class="pa-5"
       >
-        <div
-          v-show="codeEditor"
-          ref="code"
-        />
-      </transition>
-    </v-flex>
-    <v-flex
-      md6
-      xs12
-      class="pa-5"
-    >
-      <transition
-        name="fade"
+        <transition
+          name="fade"
+        >
+          <div
+            v-show="codeEditor"
+            ref="code"
+          />
+        </transition>
+      </v-flex>
+      <v-flex
+        md6
+        xs12
+        class="pa-5"
       >
-        <div
-          v-show="treeEditor"
-          ref="tree"
-        />
-      </transition>
-    </v-flex>
-  </v-layout>
+        <transition
+          name="fade"
+        >
+          <div
+            v-show="treeEditor"
+            ref="tree"
+          />
+        </transition>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
 <script>
@@ -66,21 +80,25 @@ export default {
         },
         string: 'Hello World',
       },
+      alert: true,
     };
   },
   computed: {
     ...mapState('editor', [
+      'error',
       'codeEditor',
       'treeEditor',
       'code',
       'data',
-      'error',
     ]),
   },
   watch: {
     data(value) {
       Cache.set('data', value);
       this.error && this.setError('');
+    },
+    error(value) {
+      value && this.setAlert(true);
     },
   },
   created() {
@@ -94,13 +112,13 @@ export default {
   },
   methods: {
     ...mapMutations('editor', [
+      'setError',
       'setCodeEditor',
       'setTreeEditor',
       'setCode',
     ]),
     ...mapActions('editor', [
       'setData',
-      'setError',
       'fetchData',
     ]),
     initCodeEditor() {
@@ -124,7 +142,7 @@ export default {
             mode === 'code' && this.treeEditor.update(this.data);
             mode === 'tree' && this.codeEditor.update(this.data);
           } catch (error) {
-            this.setError(error);
+            this.setError(error.toString());
           }
         },
         onColorPicker: (parent, color, onChange) => {
@@ -140,9 +158,12 @@ export default {
           }).show();
         },
         onError: (error) => {
-          this.setError(error);
+          this.setError(error.toString());
         },
       });
+    },
+    setAlert(alert) {
+      this.alert = alert;
     },
   },
 };

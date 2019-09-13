@@ -4,13 +4,16 @@ import router from '@/router';
 export default {
   namespaced: true,
   state: {
+    error: '',
     codeEditor: null,
     treeEditor: null,
     code: '',
     data: {},
-    error: null,
   },
   mutations: {
+    setError(state, error) {
+      state.error = error;
+    },
     setCodeEditor(state, codeEditor) {
       state.codeEditor = codeEditor;
     },
@@ -22,9 +25,6 @@ export default {
     },
     setData(state, data) {
       state.data = data;
-    },
-    setError(state, error) {
-      state.error = error;
     },
   },
   actions: {
@@ -46,7 +46,7 @@ export default {
         })
         .catch((error) => {
           router.push('/');
-          commit('setError', error);
+          commit('setError', error, { root: true });
         });
     },
     storeData({
@@ -57,7 +57,7 @@ export default {
           console.log(data);
         })
         .catch((error) => {
-          commit('setError', error);
+          commit('setError', error, { root: true });
         });
     },
   },

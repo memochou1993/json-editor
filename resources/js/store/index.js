@@ -10,15 +10,19 @@ export default new Vuex.Store({
     editor,
   },
   state: {
-    dialog: '',
+    error: null,
     loading: false,
+    dialog: '',
   },
   mutations: {
-    setDialog(state, dialog) {
-      state.dialog = dialog;
+    setError(state, error) {
+      state.error = error;
     },
     setLoading(state, loading) {
       state.loading = loading;
+    },
+    setDialog(state, dialog) {
+      state.dialog = dialog;
     },
   },
 });
