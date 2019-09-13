@@ -1,53 +1,39 @@
 <template>
-  <div>
-    <v-layout>
-      <v-flex>
-        <v-snackbar
-          v-if="error"
-          v-model="alert"
-          color="warning"
-          right
-        >
-          {{ error }}
-        </v-snackbar>
-      </v-flex>
-    </v-layout>
-    <v-layout
-      row
-      wrap
-      align-center
-      justify-center
+  <v-layout
+    row
+    wrap
+    align-center
+    justify-center
+  >
+    <v-flex
+      md6
+      xs12
+      class="pa-5"
     >
-      <v-flex
-        md6
-        xs12
-        class="pa-5"
+      <transition
+        name="fade"
       >
-        <transition
-          name="fade"
-        >
-          <div
-            v-show="codeEditor"
-            ref="code"
-          />
-        </transition>
-      </v-flex>
-      <v-flex
-        md6
-        xs12
-        class="pa-5"
+        <div
+          v-show="codeEditor"
+          ref="code"
+        />
+      </transition>
+    </v-flex>
+    <v-flex
+      md6
+      xs12
+      class="pa-5"
+    >
+      <transition
+        name="fade"
       >
-        <transition
-          name="fade"
-        >
-          <div
-            v-show="treeEditor"
-            ref="tree"
-          />
-        </transition>
-      </v-flex>
-    </v-layout>
-  </div>
+        <div
+          v-show="treeEditor"
+          ref="tree"
+        />
+      </transition>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -80,7 +66,6 @@ export default {
         },
         string: 'Hello World',
       },
-      alert: true,
     };
   },
   computed: {
@@ -96,9 +81,6 @@ export default {
     data(value) {
       Cache.set('data', value);
       this.error && this.setError('');
-    },
-    error(value) {
-      value && this.setAlert(true);
     },
   },
   created() {
@@ -161,9 +143,6 @@ export default {
           this.setError(error.toString());
         },
       });
-    },
-    setAlert(alert) {
-      this.alert = alert;
     },
   },
 };
