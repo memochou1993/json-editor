@@ -7,7 +7,7 @@ export default new VueRouter({
   mode: 'history',
   routes: [
     {
-      path: '/:code?',
+      path: '/editor/:code?',
       name: 'home',
       component: () => import('@/views/Home.vue'),
     },

@@ -27,6 +27,7 @@
           <v-text-field
             ref="name"
             v-model="name"
+            :loading="loading"
             type="text"
             label="Name"
             autofocus
@@ -78,6 +79,7 @@ export default {
       'loading',
     ]),
     ...mapState('editor', [
+      'code',
       'data',
     ]),
     valid() {
@@ -123,7 +125,9 @@ export default {
       this.enabled = enabled;
     },
     submit() {
-      this.storeData(this.params);
+      this.code
+        ? this.updateData(this.params)
+        : this.storeData(this.params);
     },
   },
 };

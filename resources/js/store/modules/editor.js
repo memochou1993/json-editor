@@ -38,6 +38,7 @@ export default {
       commit,
       dispatch,
     }, code) {
+      code && commit('setLoading', true, { root: true });
       code && axios.get(`/records/${code}`)
         .then(({ data }) => {
           dispatch('setData', JSON.stringify(data.data));
@@ -45,19 +46,33 @@ export default {
           state.treeEditor.set(data.data);
         })
         .catch((error) => {
-          router.push('/');
+          router.push('/editor');
           commit('setError', error, { root: true });
+        })
+        .finally(() => {
+          setTimeout(() => {
+            commit('setLoading', false, { root: true });
+          }, 0 * 1000);
         });
     },
     storeData({
       commit,
     }, params) {
+      commit('setLoading', true, { root: true });
       axios.post(`/records`, params)
         .then(({ data }) => {
-          console.log(data);
+          setTimeout(() => {
+            router.push(`/editor/${data.code}`);
+            commit('setDialog', 'AppDialogShare', { root: true });
+          }, 1 * 1000);
         })
         .catch((error) => {
           commit('setError', error, { root: true });
+        })
+        .finally(() => {
+          setTimeout(() => {
+            commit('setLoading', false, { root: true });
+          }, 1 * 1000);
         });
     },
   },

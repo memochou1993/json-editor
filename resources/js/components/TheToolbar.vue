@@ -17,7 +17,7 @@
       <v-spacer />
       <v-toolbar-items>
         <v-btn
-          :disabled="!Object.values(data).length"
+          :disabled="!Object.values(data).length || loading"
           text
           @click="save()"
         >
@@ -37,6 +37,9 @@ import {
 
 export default {
   computed: {
+    ...mapState([
+      'loading',
+    ]),
     ...mapState('editor', [
       'codeEditor',
       'treeEditor',
@@ -55,7 +58,7 @@ export default {
       this.setData({});
       this.codeEditor.set({});
       this.treeEditor.set({});
-      this.code && this.$router.push('/');
+      this.code && this.$router.push('/editor');
     },
     save() {
       this.setDialog('AppDialogSave');
