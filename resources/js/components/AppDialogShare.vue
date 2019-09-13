@@ -23,6 +23,7 @@
 
 <script>
 import {
+  mapState,
   mapMutations,
 } from 'vuex';
 
@@ -33,11 +34,14 @@ export default {
     };
   },
   computed: {
+    ...mapState('editor', [
+      'record',
+    ]),
     links() {
       return {
-        editor: `${location.host}/editor/${this.$route.params.code}`,
-        response: `${location.host}/response/${this.$route.params.code}`,
-        file: `${location.host}/file/${this.$route.params.code}`,
+        editor: `${location.host}/editor/${this.record.code}`,
+        response: `${location.host}/response/${this.record.code}`,
+        file: `${location.host}/file/${this.record.code}`,
       };
     },
   },

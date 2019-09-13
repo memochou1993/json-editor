@@ -28,7 +28,6 @@
             ref="name"
             v-model="name"
             :loading="loading"
-            type="text"
             label="Name"
             autofocus
             autocomplete="off"
@@ -79,7 +78,7 @@ export default {
       'loading',
     ]),
     ...mapState('editor', [
-      'code',
+      'record',
       'data',
     ]),
     valid() {
@@ -108,6 +107,7 @@ export default {
   },
   created() {
     this.setEnabled(true);
+    this.fill();
   },
   mounted() {
     setTimeout(() => {
@@ -125,10 +125,14 @@ export default {
     setEnabled(enabled) {
       this.enabled = enabled;
     },
+    setName(name) {
+      this.name = name;
+    },
+    fill() {
+      this.record && this.setName(this.record.name);
+    },
     submit() {
-      this.code
-        ? this.updateData(this.params)
-        : this.storeData(this.params);
+      this.record ? this.updateData(this.params) : this.storeData(this.params);
     },
   },
 };

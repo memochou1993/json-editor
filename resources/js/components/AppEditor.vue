@@ -73,9 +73,11 @@ export default {
       'error',
       'codeEditor',
       'treeEditor',
-      'code',
       'data',
     ]),
+    code() {
+      return this.$route.params.code;
+    },
   },
   watch: {
     data(value) {
@@ -84,8 +86,7 @@ export default {
     },
   },
   created() {
-    this.setCode(this.$route.params.code || '');
-    this.code ? this.fetchData() : this.setData(this.initialData);
+    this.code ? this.fetchData(this.code) : this.setData(this.initialData);
   },
   mounted() {
     this.initCodeEditor();

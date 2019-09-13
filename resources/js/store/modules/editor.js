@@ -7,7 +7,7 @@ export default {
     error: '',
     codeEditor: null,
     treeEditor: null,
-    code: '',
+    record: null,
     data: {},
   },
   mutations: {
@@ -20,8 +20,8 @@ export default {
     setTreeEditor(state, treeEditor) {
       state.treeEditor = treeEditor;
     },
-    setCode(state, code) {
-      state.code = code;
+    setRecord(state, record) {
+      state.record = record;
     },
     setData(state, data) {
       state.data = data;
@@ -31,18 +31,18 @@ export default {
     setData({
       commit,
     }, data) {
-      console.log(data);
       commit('setData', typeof data === 'string' ? JSON.parse(data) : data);
     },
     fetchData({
       state,
       commit,
       dispatch,
-    }) {
+    }, code) {
       commit('setLoading', true, { root: true });
-      axios.get(`/records/${state.code}`)
+      axios.get(`/records/${code}`)
         .then(({ data }) => {
-          dispatch('setData', JSON.stringify(data.data));
+          commit('setRecord', data);
+          dispatch('setData', data.data);
           state.codeEditor.set(data.data);
           state.treeEditor.set(data.data);
         })
@@ -58,12 +58,15 @@ export default {
     },
     storeData({
       commit,
+      dispatch,
     }, params) {
       commit('setLoading', true, { root: true });
       axios.post('/records', params)
         .then(({ data }) => {
           setTimeout(() => {
             router.push(`/editor/${data.code}`);
+            commit('setRecord', data);
+            dispatch('setData', data.data);
             commit('setDialog', 'AppDialogShare', { root: true });
           }, 1 * 1000);
         })
@@ -79,11 +82,14 @@ export default {
     updateData({
       state,
       commit,
+      dispatch,
     }, params) {
       commit('setLoading', true, { root: true });
-      axios.put(`/records/${state.code}`, params)
-        .then(() => {
+      axios.put(`/records/${state.record.code}`, params)
+        .then(({ data }) => {
           setTimeout(() => {
+            commit('setRecord', data);
+            dispatch('setData', data.data);
             commit('setDialog', '', { root: true });
           }, 1 * 1000);
         })

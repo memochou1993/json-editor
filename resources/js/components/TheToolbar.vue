@@ -23,6 +23,13 @@
         >
           Save
         </v-btn>
+        <v-btn
+          :disabled="!record || loading"
+          text
+          @click="share()"
+        >
+          Share
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -43,7 +50,7 @@ export default {
     ...mapState('editor', [
       'codeEditor',
       'treeEditor',
-      'code',
+      'record',
       'data',
     ]),
   },
@@ -51,17 +58,24 @@ export default {
     ...mapMutations([
       'setDialog',
     ]),
+    ...mapMutations('editor', [
+      'setRecord',
+    ]),
     ...mapActions('editor', [
       'setData',
     ]),
     initialize() {
+      this.record && this.$router.push('/editor');
+      this.setRecord(null);
       this.setData({});
       this.codeEditor.set({});
       this.treeEditor.set({});
-      this.code && this.$router.push('/editor');
     },
     save() {
       this.setDialog('AppDialogSave');
+    },
+    share() {
+      this.setDialog('AppDialogShare');
     },
   },
 };
