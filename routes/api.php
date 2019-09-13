@@ -13,4 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('records', 'RecordController')->except('index', 'create', 'edit');
+Route::group([
+    'namespace' => 'Api',
+], function () {
+    Route::resource('records', 'RecordController')->except('index', 'create', 'edit');
+});
