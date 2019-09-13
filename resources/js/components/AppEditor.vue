@@ -87,7 +87,7 @@ export default {
     },
   },
   created() {
-    this.code ? this.getData() : this.setData(this.initialData);
+    this.code ? this.getData() : this.initData();
   },
   mounted() {
     this.initCodeEditor();
@@ -147,6 +147,10 @@ export default {
           this.setError(error.toString());
         },
       });
+    },
+    initData() {
+      this.setData(this.initialData);
+      this.setLoaded(true);
     },
     getData() {
       this.fetchData(this.code)
