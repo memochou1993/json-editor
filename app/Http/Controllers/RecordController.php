@@ -20,7 +20,7 @@ class RecordController extends Controller
     public function store(Request $request)
     {
         $request->merge([
-            'data' => Crypt::encrypt($request->data),
+            'data' => Crypt::encrypt(json_encode($request->data)),
             'password' => $request->password ? Hash::make($request->password) : null,
         ]);
 
@@ -56,7 +56,7 @@ class RecordController extends Controller
     public function update(Request $request, Record $record)
     {
         $request->merge([
-            'data' => Crypt::encrypt($request->data),
+            'data' => Crypt::encrypt(json_encode($request->data)),
         ]);
 
         $record->update($request->only([

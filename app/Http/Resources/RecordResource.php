@@ -19,7 +19,7 @@ class RecordResource extends JsonResource
             'id' => $this->id,
             'code' => $this->code,
             'name' => $this->name,
-            'data' => Crypt::decrypt($this->data),
+            'data' => json_decode(Crypt::decrypt($this->data)),
             'expires_in' => $this->expires_in,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

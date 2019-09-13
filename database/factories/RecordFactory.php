@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Crypt;
 $factory->define(Record::class, function (Faker $faker) {
     return [
         'name' => $faker->word(),
-        'data' => Crypt::encrypt([
+        'data' => Crypt::encrypt(json_encode([
             'city' => $faker->city(),
-        ]),
+        ])),
     ];
 });
