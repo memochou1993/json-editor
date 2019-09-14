@@ -62,11 +62,14 @@ import {
   mapMutations,
   mapActions,
 } from 'vuex';
+import dialog from '@/mixins/dialog';
 
 export default {
+  mixins: [
+    dialog,
+  ],
   data () {
     return {
-      enabled: false,
       name: '',
     };
   },
@@ -106,7 +109,6 @@ export default {
     },
   },
   created() {
-    this.setEnabled(true);
     this.fill();
   },
   mounted() {
@@ -115,18 +117,20 @@ export default {
     }, 0);
   },
   methods: {
-    ...mapMutations([
-      'setDialog',
-    ]),
     ...mapActions('record', [
       'storeRecord',
       'updateRecord',
     ]),
-    setEnabled(enabled) {
-      this.enabled = enabled;
-    },
     setName(name) {
       this.name = name;
+    },
+    fill() {
+      if (this.record) {
+        this.setName(this.record.name);
+      }
+    },
+    submit() {
+      this.record ? this.editRecord() : this.createRecord();
     },
     createRecord() {
       this.storeRecord(this.params)
@@ -140,14 +144,6 @@ export default {
         .then(() => {
           this.setDialog('');
         })
-    },
-    fill() {
-      if (this.record) {
-        this.setName(this.record.name);
-      }
-    },
-    submit() {
-      this.record ? this.editRecord() : this.createRecord();
     },
   },
 };

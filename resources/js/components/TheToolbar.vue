@@ -70,8 +70,12 @@ import {
   mapMutations,
   mapActions,
 } from 'vuex';
+import dialog from '@/mixins/dialog';
 
 export default {
+  mixins: [
+    dialog,
+  ],
   computed: {
     ...mapState([
       'loading',
@@ -84,9 +88,6 @@ export default {
     ]),
   },
   methods: {
-    ...mapMutations([
-      'setDialog',
-    ]),
     ...mapActions([
       'resetState',
     ]),

@@ -53,15 +53,13 @@
 <script>
 import {
   mapState,
-  mapMutations,
 } from 'vuex';
+import dialog from '@/mixins/dialog';
 
 export default {
-  data () {
-    return {
-      enabled: false,
-    };
-  },
+  mixins: [
+    dialog,
+  ],
   computed: {
     ...mapState('record', [
       'record',
@@ -79,16 +77,7 @@ export default {
       !value && this.setDialog('');
     },
   },
-  created() {
-    this.setEnabled(true);
-  },
   methods: {
-    ...mapMutations([
-      'setDialog',
-    ]),
-    setEnabled(enabled) {
-      this.enabled = enabled;
-    },
     copy(element) {
       element.focus();
       document.execCommand('copy');
