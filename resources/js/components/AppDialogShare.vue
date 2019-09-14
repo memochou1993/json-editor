@@ -8,7 +8,7 @@
         class="pa-3"
       />
       <v-card-text
-        class="pa-5"
+        class="px-5 py-0"
       >
         <v-text-field
           v-for="(link, index) in links"
