@@ -8,21 +8,14 @@
         class="headline"
       >
         <span
-          class="default mx-2"
+          class="pointer mx-2"
+          @click="open()"
         >
           JSON Editor
         </span>
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>
-        <v-btn
-          icon
-          @click="open()"
-        >
-          <v-icon>
-            mdi-open-in-new
-          </v-icon>
-        </v-btn>
         <v-btn
           :disabled="!Object.values(data).length || loading"
           icon

@@ -4,11 +4,12 @@
     wrap
     align-center
     justify-center
+    class="px-5"
   >
     <v-flex
       md6
       xs12
-      class="pa-5"
+      class="px-5 py-3"
     >
       <transition
         name="fade"
@@ -22,7 +23,7 @@
     <v-flex
       md6
       xs12
-      class="pa-5"
+      class="px-5 py-3"
     >
       <transition
         name="fade"

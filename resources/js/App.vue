@@ -6,9 +6,7 @@
         fluid
         fill-height
       >
-        <v-flex>
-          <router-view />
-        </v-flex>
+        <router-view />
       </v-container>
     </v-content>
     <TheFooter />
@@ -32,9 +30,6 @@ export default {
 </script>
 
 <style lang="scss">
-.default {
-  cursor: default;
-}
 .pointer {
   cursor: pointer;
 }
