@@ -16,6 +16,14 @@
       <v-spacer />
       <v-toolbar-items>
         <v-btn
+          icon
+          @click="open()"
+        >
+          <v-icon>
+            mdi-open-in-new
+          </v-icon>
+        </v-btn>
+        <v-btn
           :disabled="!Object.values(data).length || loading"
           icon
           @click="save()"
@@ -25,6 +33,7 @@
           </v-icon>
         </v-btn>
         <v-btn
+          :color="confirmed ? 'warning accent-2': ''"
           :disabled="!Object.values(data).length || loading"
           icon
           @click="destroy()"
@@ -75,6 +84,11 @@ export default {
   mixins: [
     dialog,
   ],
+  data() {
+    return {
+      confirmed: false,
+    };
+  },
   computed: {
     ...mapState([
       'loading',
@@ -93,16 +107,32 @@ export default {
     ...mapActions('record', [
       'destroyRecord',
     ]),
+    setConfirmed(confirmed) {
+      this.confirmed = confirmed;
+    },
     reset() {
       this.resetState();
       this.$route.path === '/' || this.$router.push('/');
     },
+    open() {
+      window.open('/', '_blank', 'noopener noreferrer');
+    },
     save() {
       this.setDialog('AppDialogSave');
     },
+    confirm() {
+      this.setConfirmed(true);
+      setTimeout(() => {
+        this.setConfirmed(false);
+      }, 2 * 1000);
+    },
     destroy() {
+      if (!this.confirmed) {
+        return this.confirm();
+      }
       this.record && this.destroyRecord();
       this.reset();
+      return null;
     },
     share() {
       this.setDialog('AppDialogShare');
