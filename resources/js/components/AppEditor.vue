@@ -4,7 +4,6 @@
     wrap
     align-center
     justify-center
-    class="px-5"
   >
     <v-flex
       md6
@@ -45,12 +44,12 @@ import {
 } from 'vuex';
 import JsonEditor from 'jsoneditor';
 import VanillaPicker from 'jsoneditor/src/js/vanilla-picker';
-import Cache from '@/helpers/Cache';
+import Storage from '@/helpers/Storage';
 
 export default {
   data() {
     return {
-      initialData: Cache.get('data') || {
+      initialData: Storage.get('data') || {
         array: [
           1,
           2,
@@ -83,7 +82,7 @@ export default {
   },
   watch: {
     data(value) {
-      Cache.set('data', value);
+      Storage.set('data', value);
       this.error && this.setError('');
     },
   },

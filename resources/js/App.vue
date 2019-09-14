@@ -3,7 +3,6 @@
     <TheToolbar />
     <v-content>
       <v-container
-        fluid
         fill-height
       >
         <router-view />
