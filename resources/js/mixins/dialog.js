@@ -8,6 +8,11 @@ const dialog = {
       enabled: false,
     };
   },
+  watch: {
+    enabled(value) {
+      !value && this.setDialog('');
+    },
+  },
   created() {
     this.setEnabled(true);
   },

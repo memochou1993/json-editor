@@ -67,7 +67,6 @@
 <script>
 import {
   mapState,
-  mapMutations,
   mapActions,
 } from 'vuex';
 import dialog from '@/mixins/dialog';

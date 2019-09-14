@@ -8,13 +8,26 @@
       @submit.prevent="submit()"
     >
       <v-card>
-        <v-card-title />
-        <v-card-text>
+        <v-card-title
+          class="pa-3"
+        >
+          <v-spacer />
+          <v-icon
+            small
+            @click="setEnabled(false)"
+          >
+            mdi-close
+          </v-icon>
+        </v-card-title>
+        <v-divider />
+        <v-card-text
+          class="pa-5"
+        >
           <v-alert
             v-if="error"
             text
             type="error"
-            outlined
+            class="my-5"
           >
             {{ message }}
           </v-alert>
@@ -28,7 +41,7 @@
             autofocus
             autocomplete="off"
             hide-details
-            class="my-3"
+            class="my-5"
           />
         </v-card-text>
         <v-divider />
@@ -37,6 +50,7 @@
             :disabled="!valid || loading"
             text
             color="secondary"
+            small
             @click="$refs.form.reset()"
           >
             Clear
@@ -47,6 +61,7 @@
             text
             type="submit"
             color="secondary"
+            small
           >
             Save
           </v-btn>
@@ -59,7 +74,6 @@
 <script>
 import {
   mapState,
-  mapMutations,
   mapActions,
 } from 'vuex';
 import dialog from '@/mixins/dialog';
@@ -101,11 +115,6 @@ export default {
         name: this.name,
         data: this.data,
       };
-    },
-  },
-  watch: {
-    enabled(value) {
-      !value && this.setDialog('');
     },
   },
   created() {

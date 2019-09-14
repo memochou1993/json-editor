@@ -4,48 +4,53 @@
     :max-width="400"
   >
     <v-card>
-      <v-card-title />
-      <v-card-text>
+      <v-card-title
+        class="pa-3"
+      />
+      <v-card-text
+        class="pa-5"
+      >
         <v-text-field
           ref="edit"
-          :value="links.edit"
+          :value="`${link}/edit/${record.code}`"
           color="secondary"
           label="Edit"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
-          class="my-3"
+          class="my-5"
           @focus="$event.target.select()"
-          @click:append="copy($refs.edit)"
+          @click:append="copy('edit')"
         />
         <v-text-field
           ref="response"
-          :value="links.response"
+          :value="`${link}/response/${record.code}`"
           color="secondary"
           label="Response"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
-          class="my-3"
+          class="my-5"
           @focus="$event.target.select()"
-          @click:append="copy($refs.response)"
+          @click:append="copy('response')"
         />
         <v-text-field
           ref="download"
-          :value="links.download"
+          :value="`${link}/download/${record.code}`"
           color="secondary"
           label="Download"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
-          class="my-3"
+          class="my-5"
           @focus="$event.target.select()"
-          @click:append="copy($refs.download)"
+          @click:append="copy('download')"
         />
       </v-card-text>
+      <v-card-actions />
     </v-card>
   </v-dialog>
 </template>
@@ -64,22 +69,13 @@ export default {
     ...mapState('record', [
       'record',
     ]),
-    links() {
-      return {
-        edit: `${location.host}/edit/${this.record.code}`,
-        response: `${location.host}/response/${this.record.code}`,
-        download: `${location.host}/download/${this.record.code}`,
-      };
-    },
-  },
-  watch: {
-    enabled(value) {
-      !value && this.setDialog('');
+    link() {
+      return location.host;
     },
   },
   methods: {
-    copy(element) {
-      element.focus();
+    copy(type) {
+      this.$refs[type].focus();
       document.execCommand('copy');
     },
   },
