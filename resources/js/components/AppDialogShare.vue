@@ -19,12 +19,21 @@
           color="secondary"
           outlined
           readonly
-          append-icon="mdi-content-copy"
           hide-details
           class="my-5"
-          @focus="$event.target.select()"
-          @click:append="copy(link.id)"
-        />
+          @focus="focus($event)"
+        >
+          <template
+            v-slot:append
+          >
+            <v-icon
+              :color="copied === link.id ? 'secondary' : 'secondary lighten-3'"
+              @click="copy(link.id)"
+            >
+              mdi-content-copy
+            </v-icon>
+          </template>
+        </v-text-field>
       </v-card-text>
       <v-card-actions />
     </v-card>
@@ -57,7 +66,8 @@ export default {
           id: 'download',
           label: 'Download',
         },
-      ]
+      ],
+      copied: '',
     };
   },
   computed: {
@@ -66,9 +76,17 @@ export default {
     ]),
   },
   methods: {
+    setCopied(copied) {
+      this.copied = copied;
+    },
+    focus(event) {
+      event.target.select();
+      this.setCopied('');
+    },
     copy(id) {
       document.getElementById(id).focus();
       document.execCommand('copy');
+      this.setCopied(id);
     },
   },
 };
