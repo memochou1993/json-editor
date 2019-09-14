@@ -29,7 +29,7 @@
           :color="confirmed ? 'warning accent-2': ''"
           :disabled="!Object.values(data).length || loading"
           icon
-          @click="destroy()"
+          @click="deleteRecord()"
         >
           <v-icon>
             mdi-trash-can-outline
@@ -96,8 +96,8 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions([
-      'resetState',
+    ...mapActions('editor', [
+      'resetEditor',
     ]),
     ...mapActions('record', [
       'destroyRecord',
@@ -105,8 +105,15 @@ export default {
     setConfirmed(confirmed) {
       this.confirmed = confirmed;
     },
+    deleteRecord() {
+      if (!this.confirmed) {
+        return this.confirm();
+      }
+      this.record && this.destroyRecord();
+      return this.reset();
+    },
     reset() {
-      this.resetState();
+      this.resetEditor();
       this.$route.path === '/' || this.$router.push('/');
     },
     open() {
@@ -120,14 +127,6 @@ export default {
       setTimeout(() => {
         this.setConfirmed(false);
       }, 2 * 1000);
-    },
-    destroy() {
-      if (!this.confirmed) {
-        return this.confirm();
-      }
-      this.record && this.destroyRecord();
-      this.reset();
-      return null;
     },
     share() {
       this.setDialog('AppDialogShare');
