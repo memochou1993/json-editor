@@ -14,16 +14,17 @@
             v-if="error"
             text
             type="error"
+            outlined
           >
             {{ message }}
           </v-alert>
           <v-text-field
             ref="name"
             v-model="name"
-            :loading="loading"
             :readonly="loading"
             color="secondary"
             label="Name"
+            outlined
             autofocus
             autocomplete="off"
             hide-details

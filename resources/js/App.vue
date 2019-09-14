@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style lang="scss">
+.default {
+  cursor: default;
+}
 .pointer {
   cursor: pointer;
 }

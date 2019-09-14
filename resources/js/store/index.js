@@ -27,4 +27,16 @@ export default new Vuex.Store({
       state.dialog = dialog;
     },
   },
+  actions: {
+    resetState({
+      commit,
+      dispatch,
+    }) {
+      commit('setError', null);
+      commit('setLoading', false);
+      commit('setDialog', '');
+      dispatch('editor/resetEditor', null, { root: true });
+      dispatch('record/resetRecord', null, { root: true });
+    },
+  },
 });

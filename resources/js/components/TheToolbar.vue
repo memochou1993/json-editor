@@ -8,23 +8,13 @@
         class="headline"
       >
         <span
-          class="pointer mx-2"
-          @click="$router.push('/')"
+          class="default mx-2"
         >
           JSON Editor
         </span>
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>
-        <v-btn
-          :disabled="!Object.values(data).length || loading"
-          icon
-          @click="reset()"
-        >
-          <v-icon>
-            mdi-home
-          </v-icon>
-        </v-btn>
         <v-btn
           :disabled="!Object.values(data).length || loading"
           icon
@@ -37,7 +27,7 @@
         <v-btn
           :disabled="!Object.values(data).length || loading"
           icon
-          @click="discard()"
+          @click="destroy()"
         >
           <v-icon>
             mdi-trash-can-outline
@@ -62,7 +52,6 @@
           </v-icon>
         </v-btn>
         <v-btn
-          :disabled="loading"
           icon
           @click="list()"
         >
@@ -88,8 +77,6 @@ export default {
       'loading',
     ]),
     ...mapState('editor', [
-      'codeEditor',
-      'treeEditor',
       'data',
     ]),
     ...mapState('record', [
@@ -100,24 +87,22 @@ export default {
     ...mapMutations([
       'setDialog',
     ]),
-    ...mapMutations('record', [
-      'setRecord',
+    ...mapActions([
+      'resetState',
     ]),
-    ...mapActions('editor', [
-      'setData',
+    ...mapActions('record', [
+      'destroyRecord',
     ]),
     reset() {
-      this.setRecord(null);
-      this.setData({});
-      this.codeEditor.set({});
-      this.treeEditor.set({});
+      this.resetState();
       this.$route.path === '/' || this.$router.push('/');
     },
     save() {
       this.setDialog('AppDialogSave');
     },
-    discard() {
-      //
+    destroy() {
+      this.record && this.destroyRecord();
+      this.reset();
     },
     share() {
       this.setDialog('AppDialogShare');

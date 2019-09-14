@@ -12,6 +12,11 @@ export default {
     },
   },
   actions: {
+    resetRecord({
+      commit,
+    }) {
+      commit('setRecord', null);
+    },
     fetchRecord({
       commit,
     }, code) {
@@ -24,7 +29,6 @@ export default {
             resolve(data);
           })
           .catch((error) => {
-            commit('setError', error, { root: true });
             reject(error);
           })
           .finally(() => {
@@ -39,7 +43,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios.post('/records', params)
           .then(async ({ data }) => {
-            await Common.defer(1);
+            await Common.defer(0.25);
             commit('setRecord', data);
             resolve(data);
           })
@@ -60,7 +64,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios.put(`/records/${state.record.code}`, params)
           .then(async ({ data }) => {
-            await Common.defer(1);
+            await Common.defer(0.25);
             commit('setRecord', data);
             resolve(data);
           })
@@ -79,14 +83,13 @@ export default {
     }) {
       commit('setLoading', true, { root: true });
       return new Promise((resolve, reject) => {
-        axios.put(`/records/${state.record.code}`)
+        axios.delete(`/records/${state.record.code}`)
           .then(async () => {
-            await Common.defer(1);
+            await Common.defer(0.25);
             commit('setRecord', null);
             resolve();
           })
           .catch((error) => {
-            commit('setError', error, { root: true });
             reject(error);
           })
           .finally(() => {
