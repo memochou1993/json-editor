@@ -18,31 +18,57 @@
       <v-toolbar-items>
         <v-btn
           :disabled="!Object.values(data).length || loading"
-          text
-          @click="save()"
+          icon
+          @click="reset()"
         >
-          Save
-        </v-btn>
-        <v-btn
-          :disabled="!record || loading"
-          text
-          @click="download()"
-        >
-          Download
-        </v-btn>
-        <v-btn
-          :disabled="!record || loading"
-          text
-          @click="share()"
-        >
-          Share
+          <v-icon>
+            mdi-home
+          </v-icon>
         </v-btn>
         <v-btn
           :disabled="!Object.values(data).length || loading"
-          text
-          @click="reset()"
+          icon
+          @click="save()"
         >
-          Reset
+          <v-icon>
+            mdi-content-save
+          </v-icon>
+        </v-btn>
+        <v-btn
+          :disabled="!Object.values(data).length || loading"
+          icon
+          @click="discard()"
+        >
+          <v-icon>
+            mdi-trash-can-outline
+          </v-icon>
+        </v-btn>
+        <v-btn
+          :disabled="!record || loading"
+          icon
+          @click="share()"
+        >
+          <v-icon>
+            mdi-share-variant
+          </v-icon>
+        </v-btn>
+        <v-btn
+          :disabled="!record || loading"
+          icon
+          @click="download()"
+        >
+          <v-icon>
+            mdi-download
+          </v-icon>
+        </v-btn>
+        <v-btn
+          :disabled="loading"
+          icon
+          @click="list()"
+        >
+          <v-icon>
+            mdi-file-document-box-outline
+          </v-icon>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -80,21 +106,27 @@ export default {
     ...mapActions('editor', [
       'setData',
     ]),
-    save() {
-      this.setDialog('AppDialogSave');
-    },
-    download() {
-      window.location.href = `/download/${this.record.code}`;
-    },
-    share() {
-      this.setDialog('AppDialogShare');
-    },
     reset() {
       this.setRecord(null);
       this.setData({});
       this.codeEditor.set({});
       this.treeEditor.set({});
       this.$route.path === '/' || this.$router.push('/');
+    },
+    save() {
+      this.setDialog('AppDialogSave');
+    },
+    discard() {
+      //
+    },
+    share() {
+      this.setDialog('AppDialogShare');
+    },
+    download() {
+      window.location.href = `/download/${this.record.code}`;
+    },
+    list() {
+      //
     },
   },
 };
