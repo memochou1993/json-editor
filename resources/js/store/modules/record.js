@@ -73,5 +73,26 @@ export default {
           });
       });
     },
+    destroyRecord({
+      state,
+      commit,
+    }) {
+      commit('setLoading', true, { root: true });
+      return new Promise((resolve, reject) => {
+        axios.put(`/records/${state.record.code}`)
+          .then(async () => {
+            await Common.defer(1);
+            commit('setRecord', null);
+            resolve();
+          })
+          .catch((error) => {
+            commit('setError', error, { root: true });
+            reject(error);
+          })
+          .finally(() => {
+            commit('setLoading', false, { root: true });
+          });
+      });
+    },
   },
 };
