@@ -11,43 +11,19 @@
         class="pa-5"
       >
         <v-text-field
-          ref="edit"
-          :value="`${link}/edit/${record.code}`"
+          v-for="(link, index) in links"
+          :id="link.id"
+          :key="index"
+          :label="link.label"
+          :value="`${host}/${link.id}/${record.code}`"
           color="secondary"
-          label="Edit"
           outlined
           readonly
           append-icon="mdi-content-copy"
           hide-details
           class="my-5"
           @focus="$event.target.select()"
-          @click:append="copy('edit')"
-        />
-        <v-text-field
-          ref="response"
-          :value="`${link}/response/${record.code}`"
-          color="secondary"
-          label="Response"
-          outlined
-          readonly
-          append-icon="mdi-content-copy"
-          hide-details
-          class="my-5"
-          @focus="$event.target.select()"
-          @click:append="copy('response')"
-        />
-        <v-text-field
-          ref="download"
-          :value="`${link}/download/${record.code}`"
-          color="secondary"
-          label="Download"
-          outlined
-          readonly
-          append-icon="mdi-content-copy"
-          hide-details
-          class="my-5"
-          @focus="$event.target.select()"
-          @click:append="copy('download')"
+          @click:append="copy(link.id)"
         />
       </v-card-text>
       <v-card-actions />
@@ -65,17 +41,33 @@ export default {
   mixins: [
     dialog,
   ],
+  data() {
+    return {
+      host: location.host,
+      links: [
+        {
+          id: 'edit',
+          label: 'Edit',
+        },
+        {
+          id: 'response',
+          label: 'Response',
+        },
+        {
+          id: 'download',
+          label: 'Download',
+        },
+      ]
+    };
+  },
   computed: {
     ...mapState('record', [
       'record',
     ]),
-    link() {
-      return location.host;
-    },
   },
   methods: {
-    copy(type) {
-      this.$refs[type].focus();
+    copy(id) {
+      document.getElementById(id).focus();
       document.execCommand('copy');
     },
   },
