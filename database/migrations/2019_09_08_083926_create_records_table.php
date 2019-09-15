@@ -16,7 +16,7 @@ class CreateRecordsTable extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->json('data');
+            $table->mediumText('data');
             $table->string('password')->nullable();
             $table->integer('expires_in')->nullable();
             $table->timestamps();
