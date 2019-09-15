@@ -11,7 +11,7 @@ import {
 import AppRecordSave from '@/components/AppRecordSave';
 import AppRecordSaveAs from '@/components/AppRecordSaveAs';
 import AppRecordRename from '@/components/AppRecordRename';
-import AppRecordDestroy from '@/components/AppRecordDestroy';
+import AppRecordDelete from '@/components/AppRecordDelete';
 import AppRecordShare from '@/components/AppRecordShare';
 
 export default {
@@ -19,7 +19,7 @@ export default {
     AppRecordSave,
     AppRecordSaveAs,
     AppRecordRename,
-    AppRecordDestroy,
+    AppRecordDelete,
     AppRecordShare,
   },
   computed: {

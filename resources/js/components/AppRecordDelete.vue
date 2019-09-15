@@ -11,6 +11,8 @@ import {
 export default {
   created() {
     this.deleteRecord();
+  },
+  mounted() {
     this.setComponent('');
   },
   methods: {

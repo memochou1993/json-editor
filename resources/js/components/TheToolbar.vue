@@ -53,7 +53,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!record || !valid"
+              :disabled="!valid"
               @click="saveAs()"
             >
               <v-list-item-title>
@@ -61,7 +61,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!record || !valid"
+              :disabled="!record"
               @click="rename()"
             >
               <v-list-item-title>
@@ -69,7 +69,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!record || !valid"
+              :disabled="!record"
               @click="destroy()"
             >
               <v-list-item-title>
@@ -151,7 +151,7 @@ export default {
       this.setComponent('AppRecordRename');
     },
     destroy() {
-      this.setComponent('AppRecordDestroy');
+      this.setComponent('AppRecordDelete');
     },
     share() {
       this.setComponent('AppRecordShare');

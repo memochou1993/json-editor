@@ -17,7 +17,7 @@ export default new Vuex.Store({
     loading: false,
     component: '',
     settings: Storage.get('settings') || {
-      initial: false,
+      initialized: false,
     },
   },
   mutations: {

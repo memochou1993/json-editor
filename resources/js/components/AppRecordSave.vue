@@ -22,6 +22,8 @@ export default {
   },
   created() {
     this.editRecord();
+  },
+  mounted() {
     this.setComponent('');
   },
   methods: {

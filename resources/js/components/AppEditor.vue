@@ -14,7 +14,7 @@
         name="fade"
       >
         <div
-          v-show="codeEditor && loaded"
+          v-show="loaded"
           ref="code"
         />
       </transition>
@@ -28,7 +28,7 @@
         name="fade"
       >
         <div
-          v-show="treeEditor && loaded"
+          v-show="loaded"
           ref="tree"
         />
       </transition>
@@ -85,7 +85,7 @@ export default {
       };
     },
     code() {
-      return this.$route.params.code;
+      return this.$route.params.code || '';
     },
   },
   watch: {

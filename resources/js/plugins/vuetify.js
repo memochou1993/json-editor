@@ -12,7 +12,6 @@ export default new Vuetify({
       light: {
         primary: '#061D30',
         secondary: colors.blueGrey,
-        warning: colors.orange,
       },
     },
   },

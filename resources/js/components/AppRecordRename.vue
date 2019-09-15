@@ -23,14 +23,6 @@
         <v-card-text
           class="pa-5"
         >
-          <v-alert
-            v-if="error"
-            text
-            type="error"
-            class="my-5"
-          >
-            {{ message }}
-          </v-alert>
           <v-text-field
             ref="name"
             v-model="name"
@@ -89,7 +81,6 @@ export default {
   },
   computed: {
     ...mapState([
-      'error',
       'loading',
     ]),
     ...mapState('record', [
@@ -97,15 +88,6 @@ export default {
     ]),
     valid() {
       return this.name && this.name.trim();
-    },
-    message() {
-      if (!this.error) {
-        return '';
-      }
-      if (this.error.response) {
-        return this.error.response.data.message;
-      }
-      return this.error.message;
     },
     params() {
       return {
@@ -129,16 +111,14 @@ export default {
       this.name = name;
     },
     fill() {
-      if (this.record) {
-        this.setName(this.record.name);
-      }
+      this.setName(this.record.name);
     },
     submit() {
       this.renameRecord();
     },
     renameRecord() {
       this.updateRecord(this.params)
-        .then((data) => {
+        .then(() => {
           this.setComponent('');
         });
     },
