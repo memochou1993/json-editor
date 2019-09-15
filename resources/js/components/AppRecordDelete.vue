@@ -28,7 +28,7 @@ export default {
     deleteRecord() {
       this.resetEditor();
       this.destroyRecord();
-      this.$route.path === '/' || this.$router.push('/');
+      this.$router.push('/');
     },
   },
 };
