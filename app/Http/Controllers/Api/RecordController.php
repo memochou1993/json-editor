@@ -22,7 +22,10 @@ class RecordController extends Controller
     {
         $request->merge([
             'data' => Crypt::encrypt(json_encode($request->data)),
-            'password' => $request->password ? Hash::make($request->password) : null,
+        ]);
+
+        $request->password && $request->merge([
+            'password' => Hash::make($request->password),
         ]);
 
         $record = Record::create($request->all());
@@ -56,14 +59,14 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-        $request->merge([
+        $request->data && $request->merge([
             'data' => Crypt::encrypt(json_encode($request->data)),
         ]);
 
-        $record->update($request->only([
-            'name',
-            'data',
-        ]));
+        $record->update([
+            'name' => $request->name ?? $record->name,
+            'data' => $request->data ?? $record->data,
+        ]);
 
         return new Resource($record);
     }
