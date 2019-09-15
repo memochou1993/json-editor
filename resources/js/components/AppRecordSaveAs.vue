@@ -128,7 +128,6 @@ export default {
   methods: {
     ...mapActions('record', [
       'storeRecord',
-      'updateRecord',
     ]),
     setName(name) {
       this.name = name;
@@ -139,20 +138,14 @@ export default {
       }
     },
     submit() {
-      this.record ? this.editRecord() : this.createRecord();
+      this.createRecord();
     },
     createRecord() {
       this.storeRecord(this.params)
         .then((data) => {
-          this.setDialog('');
+          this.setComponent('');
           this.$router.push(`/${data.code}`);
         });
-    },
-    editRecord() {
-      this.updateRecord(this.params)
-        .then(() => {
-          this.setDialog('');
-        })
     },
   },
 };

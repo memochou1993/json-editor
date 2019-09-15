@@ -16,53 +16,84 @@
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>
-        <v-btn
-          :disabled="!Object.values(data).length || loading"
-          icon
-          @click="save()"
+        <v-menu
+          offset-y
         >
-          <v-icon>
-            mdi-content-save
-          </v-icon>
-        </v-btn>
+          <template
+            v-slot:activator="{ on }"
+          >
+            <v-btn
+              text
+              v-on="on"
+            >
+              Files
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              @click="newFile()"
+            >
+              <v-list-item-title>
+                New File
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              @click="newWindow()"
+            >
+              <v-list-item-title>
+                New Window
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :disabled="!valid"
+              @click="record ? save() : saveAs()"
+            >
+              <v-list-item-title>
+                Save
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :disabled="!record || !valid"
+              @click="saveAs()"
+            >
+              <v-list-item-title>
+                Save As...
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :disabled="!record || !valid"
+              @click="rename()"
+            >
+              <v-list-item-title>
+                Rename
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :disabled="!record || !valid"
+              @click="destroy()"
+            >
+              <v-list-item-title>
+                Delete
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-toolbar-items>
+      <v-toolbar-items>
         <v-btn
-          :color="confirmed ? 'warning accent-2': ''"
-          :disabled="!Object.values(data).length || loading"
-          icon
-          @click="deleteRecord()"
-        >
-          <v-icon>
-            mdi-trash-can-outline
-          </v-icon>
-        </v-btn>
-        <v-btn
-          :disabled="!record || loading"
-          icon
-          @click="share()"
-        >
-          <v-icon>
-            mdi-share-variant
-          </v-icon>
-        </v-btn>
-        <v-btn
-          :disabled="!record || loading"
-          icon
+          :disabled="!record"
+          text
           @click="download()"
         >
-          <v-icon>
-            mdi-download
-          </v-icon>
+          Download
         </v-btn>
-        <!--
         <v-btn
-          icon
-          @click="list()"
+          :disabled="!record"
+          text
+          @click="share()"
         >
-          <v-icon>
-            mdi-file-document-box-outline
-          </v-icon>
+          Share
         </v-btn>
-        -->
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -71,19 +102,11 @@
 <script>
 import {
   mapState,
+  mapMutations,
   mapActions,
 } from 'vuex';
-import dialog from '@/mixins/dialog';
 
 export default {
-  mixins: [
-    dialog,
-  ],
-  data() {
-    return {
-      confirmed: false,
-    };
-  },
   computed: {
     ...mapState([
       'loading',
@@ -94,48 +117,41 @@ export default {
     ...mapState('record', [
       'record',
     ]),
+    valid() {
+      return Object.values(this.data).length;
+    },
   },
   methods: {
-    ...mapActions('editor', [
-      'resetEditor',
+    ...mapMutations([
+      'setComponent',
     ]),
-    ...mapActions('record', [
-      'destroyRecord',
+    ...mapActions([
+      'resetState',
     ]),
-    setConfirmed(confirmed) {
-      this.confirmed = confirmed;
-    },
-    deleteRecord() {
-      if (!this.confirmed) {
-        return this.confirm();
-      }
-      this.record && this.destroyRecord();
-      return this.reset();
-    },
-    reset() {
-      this.resetEditor();
+    newFile() {
+      this.resetState();
       this.$route.path === '/' || this.$router.push('/');
     },
-    open() {
-      window.open('/', '_blank', 'noopener noreferrer');
+    newWindow() {
+      window.open('/new', '_blank', 'noopener noreferrer');
     },
     save() {
-      this.setDialog('AppDialogSave');
+      this.setComponent('AppRecordSave');
     },
-    confirm() {
-      this.setConfirmed(true);
-      setTimeout(() => {
-        this.setConfirmed(false);
-      }, 2 * 1000);
+    saveAs() {
+      this.setComponent('AppRecordSaveAs');
+    },
+    rename() {
+      this.setComponent('AppRecordRename');
+    },
+    destroy() {
+      this.setComponent('AppRecordDestroy');
     },
     share() {
-      this.setDialog('AppDialogShare');
+      this.setComponent('AppRecordShare');
     },
     download() {
       window.location.href = `/download/${this.record.code}`;
-    },
-    list() {
-      //
     },
   },
 };

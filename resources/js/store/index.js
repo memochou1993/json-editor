@@ -14,7 +14,7 @@ export default new Vuex.Store({
   state: {
     error: null,
     loading: false,
-    dialog: '',
+    component: '',
   },
   mutations: {
     setError(state, error) {
@@ -23,8 +23,8 @@ export default new Vuex.Store({
     setLoading(state, loading) {
       state.loading = loading;
     },
-    setDialog(state, dialog) {
-      state.dialog = dialog;
+    setComponent(state, component) {
+      state.component = component;
     },
   },
   actions: {
@@ -34,7 +34,7 @@ export default new Vuex.Store({
     }) {
       commit('setError', null);
       commit('setLoading', false);
-      commit('setDialog', '');
+      commit('setComponent', '');
       dispatch('editor/resetEditor', null, { root: true });
       dispatch('record/resetRecord', null, { root: true });
     },

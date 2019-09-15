@@ -40,11 +40,7 @@ class RecordRequest extends FormRequest
 
             case 'records.update':
                 return [
-                    'name' => [
-                        'required',
-                    ],
                     'data' => [
-                        'required',
                         'array',
                     ],
                 ];

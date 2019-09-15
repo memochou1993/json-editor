@@ -9,21 +9,21 @@
       </v-container>
     </v-content>
     <TheFooter />
-    <TheDialogRegistrar />
+    <TheComponentRegistrar />
   </v-app>
 </template>
 
 <script>
 import TheToolbar from '@/components/TheToolbar.vue';
 import TheFooter from '@/components/TheFooter.vue';
-import TheDialogRegistrar from '@/components/TheDialogRegistrar';
+import TheComponentRegistrar from '@/components/TheComponentRegistrar';
 
 export default {
   name: 'App',
   components: {
     TheToolbar,
     TheFooter,
-    TheDialogRegistrar,
+    TheComponentRegistrar,
   },
 };
 </script>

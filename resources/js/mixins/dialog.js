@@ -10,7 +10,7 @@ const dialog = {
   },
   watch: {
     enabled(value) {
-      !value && this.setDialog('');
+      !value && this.setComponent('');
     },
   },
   created() {
@@ -18,7 +18,7 @@ const dialog = {
   },
   methods: {
     ...mapMutations([
-      'setDialog',
+      'setComponent',
     ]),
     setEnabled(enabled) {
       this.enabled = enabled;

@@ -150,7 +150,7 @@ export default {
       });
     },
     initData() {
-      this.setData(this.initialData);
+      this.setData(this.$route.path === '/new' ? {} : this.initialData);
       this.setLoaded(true);
     },
     getRecord() {
