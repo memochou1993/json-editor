@@ -63,26 +63,30 @@ export default {
       'data',
     ]),
     initialData() {
+      const data = Storage.get('data');
+      if (!data) {
+        return {
+          array: [
+            1,
+            2,
+            3,
+          ],
+          boolean: true,
+          color: '#82b92c',
+          null: null,
+          number: 123,
+          object: {
+            a: 'b',
+            c: 'd',
+            e: 'f',
+          },
+          string: 'Hello World',
+        };
+      }
       if (!this.settings.initialized) {
         return {};
       }
-      return Storage.get('data') || {
-        array: [
-          1,
-          2,
-          3,
-        ],
-        boolean: true,
-        color: '#82b92c',
-        null: null,
-        number: 123,
-        object: {
-          a: 'b',
-          c: 'd',
-          e: 'f',
-        },
-        string: 'Hello World',
-      };
+      return data;
     },
     code() {
       return this.$route.params.code || '';
