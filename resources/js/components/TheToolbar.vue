@@ -45,6 +45,13 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
+              @click="openRecent()"
+            >
+              <v-list-item-title>
+                Open Recent
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
               :disabled="!valid"
               @click="record ? save() : saveAs()"
             >
@@ -70,6 +77,22 @@
             </v-list-item>
             <v-list-item
               :disabled="!record"
+              @click="download()"
+            >
+              <v-list-item-title>
+                Download
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :disabled="!record"
+              @click="share()"
+            >
+              <v-list-item-title>
+                Share
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :disabled="!record"
               @click="destroy()"
             >
               <v-list-item-title>
@@ -78,22 +101,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-      </v-toolbar-items>
-      <v-toolbar-items>
-        <v-btn
-          :disabled="!record"
-          text
-          @click="download()"
-        >
-          Download
-        </v-btn>
-        <v-btn
-          :disabled="!record"
-          text
-          @click="share()"
-        >
-          Share
-        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -140,6 +147,9 @@ export default {
     newWindow() {
       this.setSettings({ ...Storage.get('settings'), ...{ initialized: false } });
       window.open('/', '_blank', 'noopener noreferrer');
+    },
+    openRecent() {
+      this.setComponent('AppRecordOpenRecent');
     },
     save() {
       this.setComponent('AppRecordSave');

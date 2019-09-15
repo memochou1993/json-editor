@@ -5,7 +5,7 @@
   >
     <v-card>
       <v-card-title
-        class="pa-3"
+        class="pa-2"
       />
       <v-card-text
         class="px-5 py-0"

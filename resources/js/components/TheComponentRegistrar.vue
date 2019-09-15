@@ -9,18 +9,20 @@ import {
   mapState,
 } from 'vuex';
 import AppRecordSave from '@/components/AppRecordSave';
-import AppRecordSaveAs from '@/components/AppRecordSaveAs';
-import AppRecordRename from '@/components/AppRecordRename';
-import AppRecordDelete from '@/components/AppRecordDelete';
 import AppRecordShare from '@/components/AppRecordShare';
+import AppRecordDelete from '@/components/AppRecordDelete';
+import AppRecordRename from '@/components/AppRecordRename';
+import AppRecordSaveAs from '@/components/AppRecordSaveAs';
+import AppRecordOpenRecent from '@/components/AppRecordOpenRecent';
 
 export default {
   components: {
     AppRecordSave,
-    AppRecordSaveAs,
-    AppRecordRename,
-    AppRecordDelete,
     AppRecordShare,
+    AppRecordDelete,
+    AppRecordRename,
+    AppRecordSaveAs,
+    AppRecordOpenRecent,
   },
   computed: {
     ...mapState([
