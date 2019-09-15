@@ -14,7 +14,7 @@
         name="fade"
       >
         <div
-          v-show="loaded"
+          v-show="codeEditor && loaded"
           ref="code"
         />
       </transition>
@@ -28,7 +28,7 @@
         name="fade"
       >
         <div
-          v-show="loaded"
+          v-show="treeEditor && loaded"
           ref="tree"
         />
       </transition>
