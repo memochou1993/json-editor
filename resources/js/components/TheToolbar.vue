@@ -9,7 +9,7 @@
       >
         <span
           class="pointer mx-2"
-          @click="open()"
+          @click="reload()"
         >
           JSON Editor
         </span>
@@ -26,7 +26,7 @@
               text
               v-on="on"
             >
-              Files
+              File
             </v-btn>
           </template>
           <v-list>
@@ -105,6 +105,7 @@ import {
   mapMutations,
   mapActions,
 } from 'vuex';
+import Storage from '@/helpers/Storage';
 
 export default {
   computed: {
@@ -127,13 +128,18 @@ export default {
     ]),
     ...mapActions([
       'resetState',
+      'setSettings',
     ]),
+    reload() {
+      this.$router.go(0);
+    },
     newFile() {
       this.resetState();
       this.$route.path === '/' || this.$router.push('/');
     },
     newWindow() {
-      window.open('/new', '_blank', 'noopener noreferrer');
+      this.setSettings({ ...Storage.get('settings'), ...{ initialized: false } });
+      window.open('/', '_blank', 'noopener noreferrer');
     },
     save() {
       this.setComponent('AppRecordSave');

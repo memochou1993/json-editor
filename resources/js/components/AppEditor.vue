@@ -49,7 +49,24 @@ import Storage from '@/helpers/Storage';
 export default {
   data() {
     return {
-      initialData: Storage.get('data') || {
+      loaded: false,
+    };
+  },
+  computed: {
+    ...mapState([
+      'settings',
+    ]),
+    ...mapState('editor', [
+      'codeEditor',
+      'treeEditor',
+      'error',
+      'data',
+    ]),
+    initialData() {
+      if (!this.settings.initialized) {
+        return {};
+      }
+      return Storage.get('data') || {
         array: [
           1,
           2,
@@ -65,17 +82,8 @@ export default {
           e: 'f',
         },
         string: 'Hello World',
-      },
-      loaded: false,
-    };
-  },
-  computed: {
-    ...mapState('editor', [
-      'error',
-      'codeEditor',
-      'treeEditor',
-      'data',
-    ]),
+      };
+    },
     code() {
       return this.$route.params.code;
     },
@@ -87,17 +95,21 @@ export default {
     },
   },
   created() {
-    this.code ? this.getRecord() : this.initData();
+    this.code ? this.getRecord() : this.initializeData();
+    this.setSettings({ ...this.settings, ...{ initialized: true } });
   },
   mounted() {
-    this.initCodeEditor();
-    this.initTreeEditor();
+    this.initializeCodeEditor();
+    this.initializeTreeEditor();
   },
   methods: {
     ...mapMutations('editor', [
       'setError',
       'setCodeEditor',
       'setTreeEditor',
+    ]),
+    ...mapActions([
+      'setSettings',
     ]),
     ...mapActions('editor', [
       'setData',
@@ -108,19 +120,19 @@ export default {
     setLoaded(loaded) {
       this.loaded = loaded;
     },
-    initCodeEditor() {
-      const codeEditor = this.initEditor(this.$refs.code, 'code');
+    initializeCodeEditor() {
+      const codeEditor = this.initializeEditor(this.$refs.code, 'code');
       this.setCodeEditor(codeEditor);
       this.codeEditor.set(this.data);
       this.codeEditor.focus();
     },
-    initTreeEditor() {
-      const treeEditor = this.initEditor(this.$refs.tree, 'tree');
+    initializeTreeEditor() {
+      const treeEditor = this.initializeEditor(this.$refs.tree, 'tree');
       this.setTreeEditor(treeEditor);
       this.treeEditor.set(this.data);
       this.treeEditor.expandAll();
     },
-    initEditor(container, mode) {
+    initializeEditor(container, mode) {
       return new JsonEditor(container, {
         mode,
         onChangeText: (data) => {
@@ -149,8 +161,8 @@ export default {
         },
       });
     },
-    initData() {
-      this.setData(this.$route.path === '/new' ? {} : this.initialData);
+    initializeData() {
+      this.setData(this.initialData);
       this.setLoaded(true);
     },
     getRecord() {

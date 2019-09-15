@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import editor from '@/store/modules/editor';
 import record from '@/store/modules/record';
+import Storage from '@/helpers/Storage';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     error: null,
     loading: false,
     component: '',
+    settings: Storage.get('settings') || {
+      initial: false,
+    },
   },
   mutations: {
     setError(state, error) {
@@ -25,6 +29,9 @@ export default new Vuex.Store({
     },
     setComponent(state, component) {
       state.component = component;
+    },
+    setSettings(state, settings) {
+      state.settings = settings;
     },
   },
   actions: {
@@ -37,6 +44,12 @@ export default new Vuex.Store({
       commit('setComponent', '');
       dispatch('editor/resetEditor', null, { root: true });
       dispatch('record/resetRecord', null, { root: true });
+    },
+    setSettings({
+      commit,
+    }, settings) {
+      commit('setSettings', settings);
+      Storage.set('settings', settings);
     },
   },
 });
