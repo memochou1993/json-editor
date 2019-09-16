@@ -107,7 +107,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios.delete(`/records/${state.record.code}`)
           .then(async () => {
-            await Common.defer(0.25);
+            await Common.defer(0);
             dispatch('setRecords', state.records.filter(record => record.code !== state.record.code));
             commit('setRecord', null);
             resolve();

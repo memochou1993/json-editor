@@ -60,7 +60,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!valid"
+              :disabled="!valid || !record"
               @click="saveAs()"
             >
               <v-list-item-title>
@@ -77,22 +77,6 @@
             </v-list-item>
             <v-list-item
               :disabled="!record"
-              @click="download()"
-            >
-              <v-list-item-title>
-                Download
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item
-              :disabled="!record"
-              @click="share()"
-            >
-              <v-list-item-title>
-                Share
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item
-              :disabled="!record"
               @click="destroy()"
             >
               <v-list-item-title>
@@ -101,6 +85,20 @@
             </v-list-item>
           </v-list>
         </v-menu>
+        <v-btn
+          :disabled="!record"
+          text
+          @click="download()"
+        >
+          Download
+        </v-btn>
+        <v-btn
+          :disabled="!record"
+          text
+          @click="share()"
+        >
+          Share
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
