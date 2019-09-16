@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "lint": "eslint --ext .js,.vue resources/js/"
     },
-    "devDependencies": {
+    "dependencies": {
         "@mdi/font": "^4.3.95",
         "axios": "^0.19",
         "babel-eslint": "^10.0.3",
