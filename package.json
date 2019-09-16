@@ -21,6 +21,7 @@
         "eslint-plugin-vue": "^5.2.3",
         "jsoneditor": "^7.0.3",
         "laravel-mix": "^4.1.4",
+        "moment": "^2.24.0",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",

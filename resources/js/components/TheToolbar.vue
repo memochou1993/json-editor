@@ -45,6 +45,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
+              v-show="!!records.length"
               @click="openRecent()"
             >
               <v-list-item-title>
@@ -60,7 +61,8 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!valid || !record"
+              v-show="record"
+              :disabled="!valid"
               @click="saveAs()"
             >
               <v-list-item-title>
@@ -68,7 +70,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!record"
+              v-show="record"
               @click="rename()"
             >
               <v-list-item-title>
@@ -76,7 +78,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!record"
+              v-show="record"
               @click="destroy()"
             >
               <v-list-item-title>
@@ -121,10 +123,11 @@ export default {
       'data',
     ]),
     ...mapState('record', [
+      'records',
       'record',
     ]),
     valid() {
-      return Object.values(this.data).length;
+      return !!Object.values(this.data).length;
     },
   },
   methods: {
