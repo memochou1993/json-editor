@@ -6,7 +6,7 @@ $primary: #16456E;
 
 div {
   .jsoneditor {
-    height: 75vh;
+    height: 80vh;
     z-index: 0;
     border-color: $primary;
   }
@@ -59,6 +59,7 @@ div {
   }
 }
 
-.jsoneditor-results {
+.jsoneditor-results,
+.jsoneditor-statusbar {
   display: none;
 }

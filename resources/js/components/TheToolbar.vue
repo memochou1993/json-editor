@@ -78,6 +78,26 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
+              :disabled="!record"
+              text
+              class="hidden-sm-and-up"
+              @click="download()"
+            >
+              <v-list-item-title>
+                Download
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :disabled="!record"
+              text
+              class="hidden-sm-and-up"
+              @click="share()"
+            >
+              <v-list-item-title>
+                Share
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
               v-show="record"
               @click="destroy()"
             >
@@ -90,6 +110,7 @@
         <v-btn
           :disabled="!record"
           text
+          class="hidden-xs-only"
           @click="download()"
         >
           Download
@@ -97,6 +118,7 @@
         <v-btn
           :disabled="!record"
           text
+          class="hidden-xs-only"
           @click="share()"
         >
           Share
