@@ -68,6 +68,9 @@ export default {
       return this.$route.params.code || '';
     },
   },
+  created() {
+    this.records.sort((a,b) => moment(b.updated_at) - moment(a.updated_at));
+  },
   methods: {
     ...mapActions('editor', [
       'setData',
