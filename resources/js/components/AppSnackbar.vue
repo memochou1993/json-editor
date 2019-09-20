@@ -2,6 +2,7 @@
   <v-snackbar
     v-model="enabled"
     :timeout="3000"
+    top
     color="secondary lighten-2 subtitle-1"
   >
     {{ message }}
