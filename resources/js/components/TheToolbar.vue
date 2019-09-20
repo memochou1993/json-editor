@@ -13,14 +13,14 @@
         >
           JSON Editor
         </span>
+        <span
+          v-if="record"
+          class="body-2 mx-2"
+        >
+          {{ record.name }}
+        </span>
       </v-toolbar-title>
       <v-spacer />
-      <div
-        v-if="record"
-        class="body-2 mx-3"
-      >
-        {{ record.name }}
-      </div>
       <v-toolbar-items>
         <v-menu
           offset-y
@@ -60,7 +60,7 @@
             </v-list-item>
             <v-list-item
               :disabled="!valid"
-              @click="record ? save() : saveAs()"
+              @click="saveOrSaveAs()"
             >
               <v-list-item-title>
                 Save
@@ -84,7 +84,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!record"
+              v-show="record"
               text
               class="hidden-sm-and-up"
               @click="download()"
@@ -94,7 +94,7 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :disabled="!record"
+              v-show="record"
               text
               class="hidden-sm-and-up"
               @click="share()"
@@ -158,6 +158,9 @@ export default {
       return !!Object.values(this.data).length;
     },
   },
+  created() {
+    this.listen();
+  },
   methods: {
     ...mapMutations([
       'setComponent',
@@ -166,6 +169,19 @@ export default {
       'resetState',
       'setSettings',
     ]),
+    listen() {
+      document.addEventListener('keydown', event => {
+        const key = event.key;
+        event.ctrlKey && key === 'n' && this.newFile();
+        event.ctrlKey && key === 'w' && this.newWindow();
+        event.ctrlKey && key === 'o' && this.openRecent();
+        event.ctrlKey && key === 's' && this.saveOrSaveAs();
+        event.ctrlKey && key === 'd' && this.destroy();
+      });
+    },
+    navigate(url) {
+      window.location.href = url;
+    },
     reload() {
       this.$router.go(0);
     },
@@ -178,25 +194,28 @@ export default {
       window.open('/', '_blank', 'noopener noreferrer');
     },
     openRecent() {
-      this.setComponent('AppRecordOpenRecent');
+      !!this.records.length && this.setComponent('AppRecordOpenRecent');
+    },
+    saveOrSaveAs(){
+      this.record ? this.save() : this.saveAs();
     },
     save() {
-      this.setComponent('AppRecordSave');
+      this.valid && this.setComponent('AppRecordSave');
     },
     saveAs() {
-      this.setComponent('AppRecordSaveAs');
+      this.valid && this.setComponent('AppRecordSaveAs');
     },
     rename() {
-      this.setComponent('AppRecordRename');
+      this.record && this.setComponent('AppRecordRename');
     },
     destroy() {
-      this.setComponent('AppRecordDelete');
+      this.record && this.setComponent('AppRecordDelete');
     },
     share() {
-      this.setComponent('AppRecordShare');
+      this.record && this.setComponent('AppRecordShare');
     },
     download() {
-      window.location.href = `/download/${this.record.code}`;
+      this.record && this.navigate(`/download/${this.record.code}`);
     },
   },
 };
