@@ -21,7 +21,7 @@
                   <v-list-item-content>
                     <v-list-item-title
                       class="secondary--text text--darken-4"
-                      v-text="`${record.name}.json`"
+                      v-text="record.name"
                     />
                   </v-list-item-content>
                   <v-list-item-action>

@@ -15,6 +15,12 @@
         </span>
       </v-toolbar-title>
       <v-spacer />
+      <div
+        v-if="record"
+        class="body-2 mx-3"
+      >
+        {{ record.name }}
+      </div>
       <v-toolbar-items>
         <v-menu
           offset-y
