@@ -15,7 +15,7 @@
           :id="link.id"
           :key="index"
           :label="link.label"
-          :value="`${host}/${link.id}/${record.code}`"
+          :value="`${location.origin}/${link.id}/${record.code}`"
           color="secondary"
           outlined
           readonly
@@ -52,7 +52,7 @@ export default {
   ],
   data() {
     return {
-      host: location.host,
+      location: location,
       links: [
         {
           id: 'edit',
@@ -84,7 +84,6 @@ export default {
       this.setCopied('');
     },
     copy(id) {
-      document.getElementById(id).focus();
       document.execCommand('copy');
       this.setCopied(id);
     },
