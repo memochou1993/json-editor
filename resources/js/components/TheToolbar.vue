@@ -13,13 +13,15 @@
         >
           JSON Editor
         </span>
-        <span
-          v-if="record"
-          class="body-2 mx-2"
-        >
-          {{ record.name }}
-        </span>
       </v-toolbar-title>
+      <v-chip
+        v-if="record"
+        label
+        outlined
+        class="mx-2"
+      >
+        {{ record.name }}
+      </v-chip>
       <v-spacer />
       <v-toolbar-items>
         <v-menu
