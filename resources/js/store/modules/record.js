@@ -43,6 +43,7 @@ export default {
           })
           .catch((error) => {
             dispatch('setRecords', state.records.filter(record => record.code !== code));
+            commit('setError', error, { root: true });
             reject(error);
           })
           .finally(() => {
