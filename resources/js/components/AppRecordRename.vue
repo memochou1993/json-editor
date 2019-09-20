@@ -24,7 +24,7 @@
           class="pa-5"
         >
           <v-text-field
-            ref="name"
+            id="name"
             v-model="name"
             :readonly="loading"
             color="secondary"
@@ -100,7 +100,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.$refs.name.focus();
+      document.getElementById('name').focus();
     }, 0);
   },
   methods: {

@@ -38,6 +38,7 @@
           </v-btn>
           <v-spacer />
           <v-btn
+            id="submit"
             :disabled="loading"
             text
             type="submit"
@@ -67,6 +68,11 @@ export default {
     ...mapState([
       'loading',
     ]),
+  },
+  mounted() {
+    setTimeout(() => {
+      document.getElementById('submit').focus();
+    }, 0);
   },
   methods: {
     ...mapActions('editor', [
