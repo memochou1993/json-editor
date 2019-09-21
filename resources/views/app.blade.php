@@ -11,13 +11,5 @@
         <script src="{{ asset('js/manifest.js') }}"></script>
         <script src="{{ asset('js/vendor.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117292723-6"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'UA-117292723-6');
-        </script>
     </body>
 </html>
