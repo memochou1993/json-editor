@@ -1,15 +1,6 @@
-# Laravel SPA
+# JSON Editor
 
-Laravel 6.0 + Vue + Vuetify 2.0 = Laravel SPA 💥
-
-## Features
-
-- Laravel 6.0
-- Vue
-- Vuetify 2.0
-- Vue Router + Vue I18n + Vue Axios
-- Material Design Icons
-- ESLint
+A tool built with [Laravel SPA](https://github.com/memochou1993/laravel-spa) and [JSON Editor](https://github.com/josdejong/jsoneditor) to view, edit, format, and validate JSON.
 
 ## Requirements
 
@@ -20,7 +11,7 @@ Laravel 6.0 + Vue + Vuetify 2.0 = Laravel SPA 💥
 Download the master branch.
 
 ```BASH
-git clone git@github.com:memochou1993/laravel-spa.git
+git clone git@github.com:memochou1993/json-editor.git
 ```
 
 Copy `.env.example` to `.env`.
@@ -47,7 +38,7 @@ Install the npm dependencies.
 npm install
 ```
 
-## Usage
+## Compiling Assets
 
 Watch assets for changes.
 
