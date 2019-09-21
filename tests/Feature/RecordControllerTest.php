@@ -30,7 +30,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->post('/api/records', $data);
+            ->post('/records', $data);
 
         // dd($response->getContent());
 
@@ -58,7 +58,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->get('/api/records/'.$record->code);
+            ->get('/records/'.$record->code);
 
         // dd($response->getContent());
 
@@ -88,7 +88,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->get('/api/records/'.$record->code);
+            ->get('/records/'.$record->code);
 
         // dd($response->getContent());
 
@@ -118,7 +118,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->get('/api/records/'.$record->code);
+            ->get('/records/'.$record->code);
 
         // dd($response->getContent());
 
@@ -146,7 +146,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->put('/api/records/'.$record->code, $data);
+            ->put('/records/'.$record->code, $data);
 
         // dd($response->getContent());
 
@@ -174,7 +174,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->delete('/api/records/'.$record->code);
+            ->delete('/records/'.$record->code);
 
         // dd($response->getContent());
 
@@ -201,7 +201,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->delete('/api/records/'.$record->code, $data);
+            ->delete('/records/'.$record->code, $data);
 
         // dd($response->getContent());
 
@@ -224,7 +224,7 @@ class RecordControllerTest extends TestCase
 
         $response = $this
             ->withHeaders($headers)
-            ->delete('/api/records/'.$record->code);
+            ->delete('/records/'.$record->code);
 
         // dd($response->getContent());
 
