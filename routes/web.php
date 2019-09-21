@@ -11,12 +11,10 @@
 |
 */
 
-Route::group([
-    'namespace' => 'Web',
-], function () {
-    Route::get('/response/{record}', 'RecordController@response');
-    Route::get('/download/{record}', 'RecordController@download');
-});
+Route::resource('records', 'RecordController')->except('index', 'create', 'edit');
+
+Route::get('/response/{record}', 'RecordController@response');
+Route::get('/download/{record}', 'RecordController@download');
 
 Route::get('/{any}', function () {
     return view('app');

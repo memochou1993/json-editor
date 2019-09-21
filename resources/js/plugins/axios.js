@@ -4,7 +4,7 @@ import VueAxios from 'vue-axios';
 
 Vue.use(VueAxios, axios);
 
-axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '';
 axios.defaults.params = {};
 
 export default axios;
