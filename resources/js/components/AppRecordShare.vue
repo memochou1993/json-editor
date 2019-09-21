@@ -15,7 +15,7 @@
           :id="link.id"
           :key="index"
           :label="link.label"
-          :value="`${location.origin}/${link.id}/${record.code}`"
+          :value="link.value"
           color="secondary"
           outlined
           readonly
@@ -52,21 +52,6 @@ export default {
   ],
   data() {
     return {
-      location: location,
-      links: [
-        {
-          id: 'edit',
-          label: 'Edit',
-        },
-        {
-          id: 'response',
-          label: 'Response',
-        },
-        {
-          id: 'download',
-          label: 'Download',
-        },
-      ],
       copied: '',
     };
   },
@@ -74,6 +59,25 @@ export default {
     ...mapState('record', [
       'record',
     ]),
+    links() {
+      return [
+        {
+          id: 'edit',
+          label: 'Edit',
+          value: `${location.origin}/${this.record.code}`,
+        },
+        {
+          id: 'response',
+          label: 'Response',
+          value: `${location.origin}/api/records/${this.record.code}`,
+        },
+        {
+          id: 'download',
+          label: 'Download',
+          value: `${location.origin}/${this.record.code}/download`,
+        },
+      ];
+    },
   },
   methods: {
     setCopied(copied) {

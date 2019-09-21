@@ -12,12 +12,6 @@ export default new VueRouter({
       component: () => import('@/views/Home.vue'),
     },
     {
-      path: '/edit/:code?',
-      redirect: {
-        name: 'home',
-      },
-    },
-    {
       path: '*',
       redirect: {
         name: 'home',

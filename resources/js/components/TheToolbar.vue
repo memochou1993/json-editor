@@ -217,7 +217,7 @@ export default {
       this.record && this.setComponent('AppRecordShare');
     },
     download() {
-      this.record && this.navigate(`/download/${this.record.code}`);
+      this.record && this.navigate(`/${this.record.code}/download`);
     },
   },
 };
