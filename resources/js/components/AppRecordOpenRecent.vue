@@ -69,7 +69,7 @@ export default {
     },
   },
   created() {
-    this.records.sort((a,b) => moment(b.updated_at) - moment(a.updated_at));
+    this.records.sort((a, b) => moment(b.updated_at) - moment(a.updated_at));
   },
   methods: {
     ...mapActions('editor', [
@@ -79,7 +79,7 @@ export default {
       'fetchRecord',
     ]),
     getRelativeTime(time) {
-      return moment(time).fromNow()
+      return moment(time).fromNow();
     },
     openRecord(code) {
       this.getRecord(code);

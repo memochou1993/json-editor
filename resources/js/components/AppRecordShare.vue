@@ -64,17 +64,17 @@ export default {
         {
           id: 'edit',
           label: 'Edit',
-          value: `${location.origin}/${this.record.code}`,
+          value: `${window.location.origin}/${this.record.code}`,
         },
         {
           id: 'response',
           label: 'Response',
-          value: `${location.origin}/api/records/${this.record.code}`,
+          value: `${window.location.origin}/api/records/${this.record.code}`,
         },
         {
           id: 'download',
           label: 'Download',
-          value: `${location.origin}/${this.record.code}/download`,
+          value: `${window.location.origin}/${this.record.code}/download`,
         },
       ];
     },

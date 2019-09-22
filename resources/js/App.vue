@@ -15,17 +15,17 @@
 </template>
 
 <script>
+import TheFooter from '@/components/TheFooter.vue';
 import TheToolbar from '@/components/TheToolbar.vue';
 import AppSnackbar from '@/components/AppSnackbar.vue';
-import TheFooter from '@/components/TheFooter.vue';
 import TheComponentRegistrar from '@/components/TheComponentRegistrar';
 
 export default {
   name: 'App',
   components: {
+    TheFooter,
     TheToolbar,
     AppSnackbar,
-    TheFooter,
     TheComponentRegistrar,
   },
 };

@@ -9,6 +9,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/recommended',
+    'airbnb-base',
   ],
   plugins: [
     'vue',
@@ -18,5 +19,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-param-reassign': ['error', { 'props': false }],
     'no-unused-expressions': ['error', { 'allowShortCircuit': true, 'allowTernary': true }],
+    'import/no-unresolved': ['error', { 'ignore': ['@/'] }],
   },
 };

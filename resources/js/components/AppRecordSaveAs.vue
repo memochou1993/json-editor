@@ -74,7 +74,7 @@ export default {
   mixins: [
     dialog,
   ],
-  data () {
+  data() {
     return {
       name: '',
     };

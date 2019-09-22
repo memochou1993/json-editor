@@ -172,13 +172,14 @@ export default {
       'setSettings',
     ]),
     listen() {
-      document.addEventListener('keydown', event => {
-        const key = event.key;
-        event.ctrlKey && key === 'n' && this.newFile();
-        event.ctrlKey && key === 'w' && this.newWindow();
-        event.ctrlKey && key === 'o' && this.openRecent();
-        event.ctrlKey && key === 's' && this.saveOrSaveAs();
-        event.ctrlKey && key === 'd' && this.destroy();
+      document.addEventListener('keydown', (event) => {
+        const { key } = event;
+        const { ctrlKey } = event;
+        key === 'n' && ctrlKey && this.newFile();
+        key === 'w' && ctrlKey && this.newWindow();
+        key === 'o' && ctrlKey && this.openRecent();
+        key === 's' && ctrlKey && this.saveOrSaveAs();
+        key === 'd' && ctrlKey && this.destroy();
       });
     },
     navigate(url) {
@@ -198,7 +199,7 @@ export default {
     openRecent() {
       !!this.records.length && this.setComponent('AppRecordOpenRecent');
     },
-    saveOrSaveAs(){
+    saveOrSaveAs() {
       this.record ? this.save() : this.saveAs();
     },
     save() {

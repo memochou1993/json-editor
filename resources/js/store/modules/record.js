@@ -42,7 +42,7 @@ export default {
             resolve(data);
           })
           .catch((error) => {
-            dispatch('setRecords', state.records.filter(record => record.code !== code));
+            dispatch('setRecords', state.records.filter((record) => record.code !== code));
             commit('setError', error, { root: true });
             reject(error);
           })
@@ -84,8 +84,8 @@ export default {
         axios.put(`/records/${state.record.code}`, params)
           .then(async ({ data }) => {
             await Common.defer(0.25);
-            dispatch('setRecords', state.records.find(record => record.code === data.code)
-              ? state.records.map(record => record.code === data.code ? data : record)
+            dispatch('setRecords', state.records.find((record) => record.code === data.code)
+              ? state.records.map((record) => (record.code === data.code ? data : record))
               : [...state.records, data]);
             commit('setRecord', data);
             resolve(data);
@@ -109,7 +109,7 @@ export default {
         axios.delete(`/records/${state.record.code}`)
           .then(async () => {
             await Common.defer(0);
-            dispatch('setRecords', state.records.filter(record => record.code !== state.record.code));
+            dispatch('setRecords', state.records.filter((record) => record.code !== state.record.code));
             commit('setRecord', null);
             resolve();
           })
