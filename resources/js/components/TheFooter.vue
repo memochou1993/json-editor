@@ -7,7 +7,7 @@
       class="primary primary-gradient text-center"
     >
       <v-card-text
-        class="white--text"
+        class="white--text py-3"
       >
         <span
           class="pointer"

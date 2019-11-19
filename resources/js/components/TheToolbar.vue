@@ -2,6 +2,7 @@
   <div>
     <v-toolbar
       dark
+      height="60px"
       class="primary primary-gradient"
     >
       <v-toolbar-title
