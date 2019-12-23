@@ -9,7 +9,7 @@
       </v-container>
     </v-content>
     <TheFooter />
-    <AppSnackbar />
+    <TheSnackbar />
     <TheComponentRegistrar />
   </v-app>
 </template>
@@ -17,7 +17,7 @@
 <script>
 import TheFooter from '@/components/TheFooter.vue';
 import TheToolbar from '@/components/TheToolbar.vue';
-import AppSnackbar from '@/components/AppSnackbar.vue';
+import TheSnackbar from '@/components/TheSnackbar.vue';
 import TheComponentRegistrar from '@/components/TheComponentRegistrar';
 
 export default {
@@ -25,7 +25,7 @@ export default {
   components: {
     TheFooter,
     TheToolbar,
-    AppSnackbar,
+    TheSnackbar,
     TheComponentRegistrar,
   },
 };

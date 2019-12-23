@@ -1,13 +1,13 @@
 <template>
-  <AppEditor />
+  <TheEditor />
 </template>
 
 <script>
-import AppEditor from '@/components/AppEditor.vue';
+import TheEditor from '@/components/TheEditor.vue';
 
 export default {
   components: {
-    AppEditor,
+    TheEditor,
   },
 };
 </script>

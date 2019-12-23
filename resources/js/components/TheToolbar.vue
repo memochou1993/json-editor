@@ -198,25 +198,25 @@ export default {
       window.open('/', '_blank', 'noopener noreferrer');
     },
     openRecent() {
-      !!this.records.length && this.setComponent('AppRecordOpenRecent');
+      !!this.records.length && this.setComponent('RecordOpenRecent');
     },
     saveOrSaveAs() {
       this.record ? this.save() : this.saveAs();
     },
     save() {
-      this.valid && this.setComponent('AppRecordSave');
+      this.valid && this.setComponent('RecordSave');
     },
     saveAs() {
-      this.valid && this.setComponent('AppRecordSaveAs');
+      this.valid && this.setComponent('RecordSaveAs');
     },
     rename() {
-      this.record && this.setComponent('AppRecordRename');
+      this.record && this.setComponent('RecordRename');
     },
     destroy() {
-      this.record && this.setComponent('AppRecordDelete');
+      this.record && this.setComponent('RecordDelete');
     },
     share() {
-      this.record && this.setComponent('AppRecordShare');
+      this.record && this.setComponent('RecordShare');
     },
     download() {
       this.record && this.navigate(`/${this.record.code}/download`);
