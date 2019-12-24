@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <TheToolbar />
+    <FunctionRegistrar />
     <v-content>
       <v-container
         fill-height
@@ -10,23 +11,22 @@
     </v-content>
     <TheFooter />
     <TheSnackbar />
-    <TheComponentRegistrar />
   </v-app>
 </template>
 
 <script>
+import FunctionRegistrar from '@/components/FunctionRegistrar';
 import TheFooter from '@/components/TheFooter.vue';
 import TheToolbar from '@/components/TheToolbar.vue';
 import TheSnackbar from '@/components/TheSnackbar.vue';
-import TheComponentRegistrar from '@/components/TheComponentRegistrar';
 
 export default {
   name: 'App',
   components: {
+    FunctionRegistrar,
     TheFooter,
     TheToolbar,
     TheSnackbar,
-    TheComponentRegistrar,
   },
 };
 </script>
