@@ -10,7 +10,9 @@ const dialog = {
   },
   watch: {
     enabled(value) {
-      !value && this.setComponent('');
+      if (!value) {
+        this.setComponent('');
+      }
     },
   },
   created() {

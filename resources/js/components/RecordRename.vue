@@ -96,7 +96,7 @@ export default {
     },
   },
   created() {
-    this.fill();
+    this.restore();
   },
   mounted() {
     setTimeout(() => {
@@ -110,7 +110,7 @@ export default {
     setName(name) {
       this.name = name;
     },
-    fill() {
+    restore() {
       this.setName(this.record.name);
     },
     submit() {

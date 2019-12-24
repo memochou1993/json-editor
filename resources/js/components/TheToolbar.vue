@@ -191,35 +191,52 @@ export default {
     },
     newFile() {
       this.resetState();
-      this.$route.path === '/' || this.$router.push('/');
+      if (this.$route.path === '/') {
+        return;
+      }
+      this.$router.push('/');
     },
     newWindow() {
       this.setSettings({ ...Storage.get('settings'), ...{ initialized: false } });
       window.open('/', '_blank', 'noopener noreferrer');
     },
     openRecent() {
-      !!this.records.length && this.setComponent('RecordOpenRecent');
+      if (this.records.length) {
+        this.setComponent('RecordOpenRecent');
+      }
     },
     saveOrSaveAs() {
       this.record ? this.save() : this.saveAs();
     },
     save() {
-      this.valid && this.setComponent('RecordSave');
+      if (this.valid) {
+        this.setComponent('RecordSave');
+      }
     },
     saveAs() {
-      this.valid && this.setComponent('RecordSaveAs');
+      if (this.valid) {
+        this.setComponent('RecordSaveAs');
+      }
     },
     rename() {
-      this.record && this.setComponent('RecordRename');
+      if (this.record) {
+        this.setComponent('RecordRename');
+      }
     },
     destroy() {
-      this.record && this.setComponent('RecordDelete');
+      if (this.record) {
+        this.setComponent('RecordDelete');
+      }
     },
     share() {
-      this.record && this.setComponent('RecordShare');
+      if (this.record) {
+        this.setComponent('RecordShare');
+      }
     },
     download() {
-      this.record && this.navigate(`/${this.record.code}/download`);
+      if (this.record) {
+        this.navigate(`/${this.record.code}/download`);
+      }
     },
   },
 };

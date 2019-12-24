@@ -46,7 +46,9 @@ export default {
   },
   watch: {
     error(value) {
-      value && this.setEnabled(true);
+      if (value) {
+        this.setEnabled(true);
+      }
     },
   },
   methods: {
