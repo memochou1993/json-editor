@@ -62,7 +62,7 @@ export default {
       'error',
       'data',
     ]),
-    initialData() {
+    localRecord() {
       const data = Storage.get('data');
       if (!data) {
         return {
@@ -93,13 +93,16 @@ export default {
     },
   },
   watch: {
+    $route() {
+      this.getRecord();
+    },
     data(value) {
       Storage.set('data', value);
       this.error && this.setError('');
     },
   },
   created() {
-    this.code ? this.getRecord() : this.initializeData();
+    this.getRecord();
     this.setSettings({ ...this.settings, ...{ initialized: true } });
   },
   mounted() {
@@ -108,9 +111,9 @@ export default {
   },
   methods: {
     ...mapMutations('editor', [
-      'setError',
       'setCodeEditor',
       'setTreeEditor',
+      'setError',
     ]),
     ...mapActions([
       'setSettings',
@@ -165,11 +168,14 @@ export default {
         },
       });
     },
-    initializeData() {
-      this.setData(this.initialData);
+    getRecord() {
+      this.code ? this.getRemoteRecord() : this.getLocalRecord();
+    },
+    getLocalRecord() {
+      this.setData(this.localRecord);
       this.setLoaded(true);
     },
-    getRecord() {
+    getRemoteRecord() {
       this.fetchRecord(this.code)
         .then((data) => {
           this.setData(data.data);

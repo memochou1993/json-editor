@@ -12,12 +12,16 @@
       >
         <v-list>
           <v-list-item-group>
-            <template v-for="(record, index) in records">
+            <template
+              v-for="(record, index) in records"
+            >
               <v-list-item
                 :key="index"
                 @click="openRecord(record.code)"
               >
-                <template v-slot:default="{ active, toggle }">
+                <template
+                  v-slot:default="{ active, toggle }"
+                >
                   <v-list-item-content>
                     <v-list-item-title
                       class="secondary--text text--darken-4"
@@ -47,7 +51,6 @@
 <script>
 import {
   mapState,
-  mapActions,
 } from 'vuex';
 import moment from 'moment';
 import dialog from '@/mixins/dialog';
@@ -57,10 +60,6 @@ export default {
     dialog,
   ],
   computed: {
-    ...mapState('editor', [
-      'codeEditor',
-      'treeEditor',
-    ]),
     ...mapState('record', [
       'records',
     ]),
@@ -69,37 +68,21 @@ export default {
     },
   },
   created() {
-    this.records.sort((a, b) => moment(b.updated_at) - moment(a.updated_at));
+    this.sortRecords();
   },
   methods: {
-    ...mapActions('editor', [
-      'setData',
-    ]),
-    ...mapActions('record', [
-      'fetchRecord',
-    ]),
     getRelativeTime(time) {
       return moment(time).fromNow();
     },
-    openRecord(code) {
-      this.getRecord(code);
+    sortRecords() {
+      this.records.sort((a, b) => moment(b.updated_at) - moment(a.updated_at));
     },
-    getRecord(code) {
-      this.fetchRecord(code)
-        .then((data) => {
-          this.setData(data.data);
-          this.codeEditor.set(data.data);
-          this.treeEditor.set(data.data);
-        })
-        .then(() => {
-          code === this.code || this.$router.push(`/${code}`);
-        })
-        .catch(() => {
-          this.$router.push('/');
-        })
-        .finally(() => {
-          this.setComponent('');
-        });
+    openRecord(code) {
+      this.setComponent('');
+      if (code === this.code) {
+        return;
+      }
+      this.$router.push(`/${code}`);
     },
   },
 };

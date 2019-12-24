@@ -33,7 +33,10 @@ export default {
     setData({
       commit,
     }, data) {
-      data === 'null' || commit('setData', typeof data === 'string' ? JSON.parse(data) : data);
+      if (data === 'null') {
+        return;
+      }
+      commit('setData', typeof data === 'string' ? JSON.parse(data) : data);
     },
   },
 };
