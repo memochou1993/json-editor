@@ -1,4 +1,4 @@
-class Cache {
+class Storage {
   static set(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -12,4 +12,4 @@ class Cache {
   }
 }
 
-export default Cache;
+export default Storage;
