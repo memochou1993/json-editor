@@ -39,7 +39,7 @@ export default {
         return '';
       }
       if (this.error.response && this.error.response.status === 404) {
-        return this.error.response.statusText;
+        return 'Not Found';
       }
       return this.error.message;
     },
