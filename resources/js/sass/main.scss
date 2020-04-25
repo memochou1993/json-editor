@@ -4,6 +4,12 @@ $font-size-root: 16px;
 
 $primary: #16456E;
 
+@media (prefers-color-scheme: dark) {
+  body {
+    filter: invert(100%) hue-rotate(25deg);
+  }
+}
+
 div {
   .jsoneditor {
     height: 75vh;

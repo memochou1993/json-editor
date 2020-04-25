@@ -1,10 +1,10 @@
 {
-    "name": "laravel/laravel",
+    "name": "memochou1993/json-editor",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "A tool to view, edit, format, and validate JSON.",
     "keywords": [
-        "framework",
-        "laravel"
+        "JSON",
+        "editor"
     ],
     "license": "MIT",
     "require": {
