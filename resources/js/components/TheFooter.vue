@@ -15,13 +15,23 @@
         >
           Designed by Memo Chou
         </span>
+        <span
+          class="float-right"
+        >
+          <TheThemeSwitcher />
+        </span>
       </v-card-text>
     </v-card>
   </v-footer>
 </template>
 
 <script>
+import TheThemeSwitcher from '@/components/TheThemeSwitcher';
+
 export default {
+  components: {
+    TheThemeSwitcher,
+  },
   methods: {
     explore() {
       window.open('https://github.com/memochou1993/json-editor', '_blank', 'noopener noreferrer');

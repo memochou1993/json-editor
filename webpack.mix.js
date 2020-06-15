@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ mix
         '.vue',
       ],
       alias: {
-        '@': __dirname + '/resources/js',
+        '@': path.join(__dirname, '/resources/js'),
       },
     },
   })
