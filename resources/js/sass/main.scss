@@ -65,7 +65,5 @@ div {
 }
 
 .dark-mode {
-  @media (prefers-color-scheme: dark) {
-    filter: invert(100%) hue-rotate(25deg);
-  }
+  filter: invert(100%) hue-rotate(25deg);
 }
