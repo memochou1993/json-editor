@@ -5,7 +5,7 @@
     @click="toggle()"
   >
     <img
-      src="@/images/moon.png"
+      src="@/images/sun.png"
     >
   </v-avatar>
 </template>
