@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  app:
+    container_name: json-editor
+    build: .
+    restart: always
+    volumes:
+      - ./:/var/www
+    env_file: .env
+    networks:
+      - backend
+
+  nginx:
+    image: nginx:alpine
+    container_name: json-editor-nginx
+    restart: always
+    volumes:
+      - ./public:/var/www/public
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+    ports:
+      - "${APP_PORT}:80"
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:5.7.32
+    container_name: json-editor-mysql
+    restart: always
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  mysql:
