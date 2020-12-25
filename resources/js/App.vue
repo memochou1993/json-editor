@@ -2,13 +2,13 @@
   <v-app>
     <TheToolbar />
     <FunctionRegistrar />
-    <v-content>
+    <v-main>
       <v-container
         fill-height
       >
         <router-view />
       </v-container>
-    </v-content>
+    </v-main>
     <TheFooter />
     <TheSnackbar />
   </v-app>
