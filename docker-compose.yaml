@@ -5,8 +5,6 @@ services:
     container_name: json-editor
     build: .
     restart: always
-    volumes:
-      - ./:/var/www
     env_file: .env
     networks:
       - backend
