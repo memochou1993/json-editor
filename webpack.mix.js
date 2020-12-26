@@ -33,8 +33,12 @@ mix
         '@': path.join(__dirname, '/resources/js'),
       },
     },
+    output: {
+      filename:'js/[name].js',
+      chunkFilename: 'js/[name].js',
+    },
   })
-  .js('resources/js/main.js', 'public/js')
+  .js('resources/js/main.js', 'public/main.js')
   .extract([
     'axios',
     'vue',
@@ -43,5 +47,5 @@ mix
     'vue-router',
     'vuetify',
     'vuex',
-  ])
+  ], 'vendor.js')
   .sourceMaps();
