@@ -3,6 +3,7 @@
     padless
   >
     <v-card
+      tile
       width="100%"
       class="primary primary-gradient text-center"
     >
