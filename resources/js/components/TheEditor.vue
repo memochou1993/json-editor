@@ -4,6 +4,7 @@
     wrap
     align-center
     justify-center
+    class="ma-0"
   >
     <v-flex
       md6
